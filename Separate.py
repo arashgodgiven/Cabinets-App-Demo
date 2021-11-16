@@ -2,8 +2,6 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 
-#Hello
-
 root = Tk()
 root.title("Cabinets")
 root.configure(background='black')
