@@ -7,8 +7,36 @@ root.title("Cabinets")
 root.configure(background='black')
 root.geometry("700x500")
 
-status = Label(root, text="Cabinets App V1 - Rebuild", bd=1, relief=SUNKEN, pady=20)
-status.pack(fill=BOTH)
+#switch button
+
+switch = IntVar()
+switch.set(1)
+statusFrame = Frame(root)
+statusFrame.pack(fill=BOTH)
+defaultLabel = Label(statusFrame, text="Standard", font = ('Helvetiva', 9, 'bold')).grid(row=0, column=0, padx=10, sticky=E)
+customLabel = Label(statusFrame, text="Custom", font = ('Helvetiva', 9)).grid(row=0, column=2, padx=10, sticky=W)
+
+def switchIt():
+    if switch.get() == 0:
+        switch.set(1)
+        dLabel = Label(statusFrame, text="Standard", font = ('Helvetiva', 9, 'bold')).grid(row=0, column=0, padx=10, sticky=E)
+        cLabel = Label(statusFrame, text="Custom", font = ('Helvetiva', 9)).grid(row=0, column=2, padx=10, sticky=W)
+        switchButton = Button(statusFrame, text="O===", command=switchIt).grid(row=0, column=1, padx=5, sticky=W+E)
+    elif switch.get() == 1:
+        switch.set(0)
+        cLabel = Label(statusFrame, text="Custom", font = ('Helvetiva', 9, 'bold')).grid(row=0, column=2, padx=10, sticky=W)
+        dLabel = Label(statusFrame, text="Standard", font = ('Helvetiva', 9)).grid(row=0, column=0, padx=10, sticky=E)
+        switchButton = Button(statusFrame, text="===O", command=switchIt).grid(row=0, column=1, padx=5, sticky=W+E)
+
+if switch.get() == 1:
+    switchButton = Button(statusFrame, text="O===", command=switchIt).grid(row=0, column=1, padx=5, sticky=W+E)
+elif switch.get() == 0:
+    switchButton = Button(statusFrame, text="===O", command=switchIt).grid(row=0, column=1, padx=5, sticky=W+E)
+
+status = Label(statusFrame, text="Cabinets App V1 - Rebuild", bd=1, relief=SUNKEN, pady=20)
+status.grid(row=0, column=3, columnspan=10, ipadx=470, sticky=W+E)
+
+#switch button
 
 class Cabinet:
     def __init__(self, category, name, width, height, depth, shelfQty, secSide, toekick, materialThickness):
@@ -367,12 +395,14 @@ class Show:
         self.heightLabel.grid(row = givenRow, column=3)
         self.heightEntry = Entry(parent, width = 10)
         self.heightEntry.grid(row = givenRow, column=4)
-        self.heightEntry.insert(0, 34.75)
+        if switch.get() == 1:
+            self.heightEntry.insert(0, 34.75)
         self.depthLabel = Label(parent, text="Depth: ", padx=10, pady=5, anchor=E)
         self.depthLabel.grid(row = givenRow, column=5)
         self.depthEntry = Entry(parent, width = 10)
         self.depthEntry.grid(row = givenRow, column=6)
-        self.depthEntry.insert(0, 23.75)
+        if switch.get() == 1:
+            self.depthEntry.insert(0, 23.75)
         self.MTLabel1 = Label(parent, text = "M.T. : " + str(materialThickness), padx = 10, pady = 5, anchor = E)
         self.MTLabel1.grid(row = givenRow + 1, column=0)
         self.shelfLabel = Label(parent, text = "Shelves #: ", padx=10, pady=5, anchor=E)
