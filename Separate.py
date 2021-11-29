@@ -13,28 +13,56 @@ switch = IntVar()
 switch.set(1)
 statusFrame = Frame(root)
 statusFrame.pack(fill=BOTH)
-defaultLabel = Label(statusFrame, text="Standard", font = ('Helvetiva', 9, 'bold')).grid(row=0, column=0, padx=10, sticky=E)
-customLabel = Label(statusFrame, text="Custom", font = ('Helvetiva', 9)).grid(row=0, column=2, padx=10, sticky=W)
 
+switchFrame = Frame(statusFrame, highlightbackground="Gray", highlightthickness=0.5)
+switchFrame.grid(row=0, rowspan=2, column=0, padx=10, sticky=E, ipadx = 15, ipady=15)
+defaultLabel = Label(switchFrame, text="Standard", font = ('Helvetiva', 9, 'bold')).grid(row=0, rowspan=2, column=0, padx=10, sticky=E)
+customLabel = Label(switchFrame, text="Custom", font = ('Helvetiva', 9)).grid(row=0, rowspan=2, column=2, padx=10, sticky=W)
 def switchIt():
     if switch.get() == 0:
         switch.set(1)
-        dLabel = Label(statusFrame, text="Standard", font = ('Helvetiva', 9, 'bold')).grid(row=0, column=0, padx=10, sticky=E)
-        cLabel = Label(statusFrame, text="Custom", font = ('Helvetiva', 9)).grid(row=0, column=2, padx=10, sticky=W)
-        switchButton = Button(statusFrame, text="O===", command=switchIt).grid(row=0, column=1, padx=5, sticky=W+E)
+        dLabel = Label(switchFrame, text="Standard", font = ('Helvetiva', 9, 'bold')).grid(row=0, rowspan=2, column=0, padx=10, sticky=E)
+        cLabel = Label(switchFrame, text="Custom", font = ('Helvetiva', 9)).grid(row=0, rowspan=2, column=2, padx=10, sticky=W)
+        switchButton = Button(switchFrame, text="O===", command=switchIt).grid(row=0, rowspan=2, column=1, padx=5, sticky=W+E)
     elif switch.get() == 1:
         switch.set(0)
-        cLabel = Label(statusFrame, text="Custom", font = ('Helvetiva', 9, 'bold')).grid(row=0, column=2, padx=10, sticky=W)
-        dLabel = Label(statusFrame, text="Standard", font = ('Helvetiva', 9)).grid(row=0, column=0, padx=10, sticky=E)
-        switchButton = Button(statusFrame, text="===O", command=switchIt).grid(row=0, column=1, padx=5, sticky=W+E)
+        cLabel = Label(switchFrame, text="Custom", font = ('Helvetiva', 9, 'bold')).grid(row=0, rowspan=2, column=2, padx=10, sticky=W)
+        dLabel = Label(switchFrame, text="Standard", font = ('Helvetiva', 9)).grid(row=0, rowspan=2, column=0, padx=10, sticky=E)
+        switchButton = Button(switchFrame, text="===O", command=switchIt).grid(row=0, rowspan=2, column=1, padx=5, sticky=W+E)
 
 if switch.get() == 1:
-    switchButton = Button(statusFrame, text="O===", command=switchIt).grid(row=0, column=1, padx=5, sticky=W+E)
+    switchButton = Button(switchFrame, text="O===", command=switchIt).grid(row=0, rowspan=2, column=1, padx=5, sticky=W+E)
 elif switch.get() == 0:
-    switchButton = Button(statusFrame, text="===O", command=switchIt).grid(row=0, column=1, padx=5, sticky=W+E)
+    switchButton = Button(switchFrame, text="===O", command=switchIt).grid(row=0, rowspan=2, column=1, padx=5, sticky=W+E)
+
+railList = ["Regular", "Side Mount", "P-2-O SM", "P-2-O UM", "Under Mount"]
+railSpaceList = [2.25, 2.25, 2.25, 1.75, 1.5625]
+railNum = IntVar()
+railNum.set(0)
+railFrame = Frame(statusFrame, highlightbackground="Gray", highlightthickness=0.5)
+railFrame.grid(row=0, column=1, padx=10, sticky=E, ipadx = 2, ipady=2)
+
+def railChangeUp():
+    railNum.set(railNum.get() + 1)
+    if railNum.get() > 4:
+        railNum.set(0)
+    railType = Label(railFrame, text = "---------------", fg='#fff').grid(row=0, rowspan=2, column=4, padx = 10, sticky=W)
+    railType = Label(railFrame, text = railList[railNum.get()]).grid(row=0, rowspan=2, column=4, padx = 10, sticky=W)
+def railChangeDown():
+    railNum.set(railNum.get() - 1)
+    if railNum.get() < 0:
+        railNum.set(4)
+    railType = Label(railFrame, text = "---------------", fg='#fff').grid(row=0, rowspan=2, column=4, padx = 10, sticky=W)
+    railType = Label(railFrame, text = railList[railNum.get()]).grid(row=0, rowspan=2, column=4, padx = 10, sticky=W)
+
+railLabel = Label(railFrame, text = "Rail Type").grid(row=0, rowspan=2, column=3, padx=10, sticky=W)
+railType = Label(railFrame, text = "---------------", fg='#fff').grid(row=0, rowspan=2, column=4, padx = 10, sticky=W)
+railType = Label(railFrame, text = railList[railNum.get()]).grid(row=0, rowspan=2, column=4, padx = 10, sticky=W)
+railUpButton = Button(railFrame, text="˄", command=railChangeUp).grid(row=0, rowspan=1, column=5, padx=10, sticky=W)
+railDownButton = Button(railFrame, text="˅", command=railChangeDown).grid(row=1, rowspan=1, column=5, padx=10, sticky=W)
 
 status = Label(statusFrame, text="Cabinets App V1 - Rebuild", bd=1, relief=SUNKEN, pady=20)
-status.grid(row=0, column=3, columnspan=10, ipadx=470, sticky=W+E)
+status.grid(row=0, rowspan=2, column=6, columnspan=6, ipadx=350, sticky=W+E)
 
 #switch button
 
@@ -49,6 +77,7 @@ class Cabinet:
         self.secSide = secSide
         self.toeKick = toekick #4.5
         self.MT = materialThickness #0.625
+        self.railspace = railSpaceList[railNum.get()]
 
         self.listParts = []
 
@@ -70,30 +99,35 @@ class Cabinet:
             if name == "Drawers":
                 self.gable = Part(2, "Gable", self.depth - self.MT, self.height, "1L")
                 self.listParts.append(self.gable)
-                self.bottom = Part(1, "Bottom", self.depth - self.MT, self.width - 2 * self.MT, "1L")
-                self.listParts.append(self.bottom)
-                self.kick = Part(1, "Kick", self.toeKick - 0.5, self.width - 2 * self.MT, "1L")
-                self.listParts.append(self.kick)
                 self.back = Part(1, "Back", self.width, self.height - self.toeKick, "-")
                 self.listParts.append(self.back)
-                self.sides1 = Part(2, "Sides", self.height - self.width - self.MT, self.height - self.toeKick, "1L")
+                self.kick = Part(1, "Kick", self.toeKick - 0.25, self.width - 2 * self.MT, "1L")
+                self.listParts.append(self.kick)
+
+                self.sides1 = Part(2, "Sides1", "--length by user--", "--width by user--", "1L")     #EDIT
                 self.listParts.append(self.sides1)
-                self.frontBack1 = Part(2, "Front & Back", (self.height - self.toeKick - 0.25) / 3, "Unsure 27 1/16", "1L")
+                self.frontBack1 = Part(2, "Front & Back1", self.width - 2 * self.MT - 2 * self.railspace, "--width by user--", "1L")   #EDIT
                 self.listParts.append(self.frontBack1)
-                self.sides2 = Part(4, "Sides", 2 * (self.height - self.width - self.MT) - 0.125, self.height - self.toeKick, "1L")
+                self.sides2 = Part(4, "Sides2", "--length by user--", "--width by user--", "1L")
                 self.listParts.append(self.sides2)
-                self.frontBack2 = Part(4, "Front & Back", 2 * (self.height - self.width - 2 * self.MT), "Unsure 27 1/16", "1L")
+                self.frontBack2 = Part(4, "Front & Back2", self.width - 2 * self.MT - 2 * self.railspace, "--width by user--", "1L")
                 self.listParts.append(self.frontBack2)
-                self.drawerBottom = Part(3, "Drawer Bottom", "Unsure 27 1/16", "Unsure 21 3/8", "-")
+                self.drawerBottom = Part(3, "Drawer Bottom", "--length by user--", self.width - 2 * self.MT - 2 * self.railspace, "-")
+                self.listParts.append(self.drawerBottom)
+                self.topStretcher = Part(2, "Top Stretcher", 4, self.width - 2 * self.MT, "-")
+                self.listParts.append(self.topStretcher)
+                
+                # self.bottom = Part(1, "Bottom", self.depth - self.MT, self.width - 2 * self.MT, "1L")
+                # self.listParts.append(self.bottom)
 
             if name == "Corner 90":
                 self.gable = Part(2, "Gable", self.depth - self.MT, self.height, "1L")
                 self.listParts.append(self.gable)
                 self.deck = Part(2, "Deck", self.secSide - 2 * self.MT, self.depth - 2 * self.MT, "1S 90°")
                 self.listParts.append(self.deck)
-                self.kick1 = Part(1, "Kick#1", self.toeKick - 0.5, self.secSide - self.depth + 2.5, "-")
+                self.kick1 = Part(1, "Kick#1", self.toeKick - 0.25, self.secSide - self.depth + 2.5, "-")
                 self.listParts.append(self.kick1)
-                self.kick2 = Part(1, "Kick#2", self.toeKick - 0.5, self.width - self.depth + 2.5 + self.MT, "-")
+                self.kick2 = Part(1, "Kick#2", self.toeKick - 0.25, self.width - self.depth + 2.5 + self.MT, "-")
                 self.listParts.append(self.kick2)
                 self.shelf = Part(1, "Shelf", self.secSide - 2 * self.MT - 0.0625, self.width - 2 * self.MT - 0.0625, "1S 90°")
                 self.listParts.append(self.shelf)
@@ -110,9 +144,9 @@ class Cabinet:
                 self.listParts.append(self.gable)
                 self.deck = Part(2, "Deck", self.secSide - 2 * self.MT, self.depth - 2 * self.MT, "1S 90°")
                 self.listParts.append(self.deck)
-                self.kick1 = Part(1, "Kick#1", self.toeKick - 0.5, self.secSide - self.depth + 2.5, "-")
+                self.kick1 = Part(1, "Kick#1", self.toeKick - 0.25, self.secSide - self.depth + 2.5, "-")
                 self.listParts.append(self.kick1)
-                self.kick2 = Part(1, "Kick#2", self.toeKick - 0.5, self.width - self.depth + 2.5 + self.MT, "-")
+                self.kick2 = Part(1, "Kick#2", self.toeKick - 0.25, self.width - self.depth + 2.5 + self.MT, "-")
                 self.listParts.append(self.kick2)
                 self.shelf = Part(1, "Shelf", self.secSide - 2 * self.MT - 0.0625, self.width - 2 * self.MT - 0.0625, "1S 90°")
                 self.listParts.append(self.shelf)
@@ -135,7 +169,7 @@ class Cabinet:
                 self.back = Part(1, "Back", self.width, self.height, "2S")
                 self.listParts.append(self.back)
 
-            if self.name == "Corner 90":
+            if self.name == "Corner 90": #No kick for Corner 90?
                 self.gable = Part(2, "Gable", self.depth - self.MT, self.height, "1L + 2S")
                 self.listParts.append(self.gable)
                 self.deck = Part(3, "Deck", self.width - 2 * self.MT, self.width - 2 * self.MT, "1A")
@@ -159,7 +193,7 @@ class Cabinet:
                 self.listParts.append(self.gable)
                 self.bottom = Part(1, "Bottom", self.depth - self.MT, self.width - 2 * self.MT, "1L")
                 self.listParts.append(self.bottom)
-                self.kick = Part(1, "Kick", self.toeKick - 0.5, self.width - 2 * self.MT, "1L")
+                self.kick = Part(1, "Kick", self.toeKick - 0.25, self.width - 2 * self.MT, "1L")
                 self.listParts.append(self.kick)
                 if self.shelfQty > 0:
                     self.shelf = Part(self.shelfQty, "Shelf", self.depth - self.MT - 0.125, self.width - 2 * self.MT - 0.0625, "1L")
@@ -173,7 +207,7 @@ class Cabinet:
                 self.listParts.append(self.gable)
                 self.bottom = Part(1, "Bottom", self.depth - self.MT, self.width - 2 * self.MT, "1L")
                 self.listParts.append(self.bottom)
-                self.kick = Part(1, "Kick", self.toeKick - 0.5, self.width - 2 * self.MT, "1L")
+                self.kick = Part(1, "Kick", self.toeKick - 0.25, self.width - 2 * self.MT, "1L")
                 self.listParts.append(self.kick)
                 if self.shelfQty > 0:
                     self.shelf = Part(self.shelfQty, "Shelf", self.depth - self.MT - 0.125, self.width - 2 * self.MT - 0.0625, "1L")
@@ -430,6 +464,7 @@ class Show:
         self.shelfQty = int(self.shelfEntry.get())
         self.secSide = int(self.secSideEntry.get())
         self.kick = float(self.kickEntry.get())
+        # self.rail =
 
         baseCutlist = LabelFrame(cutlist_frame, text="Base", padx=5, pady=5)
         baseCutlist.grid(row=0, column=0, padx=5, pady=5, sticky=W+E)
@@ -569,16 +604,13 @@ fulldoorB = IntVar()
 drawersB = IntVar()
 corner90B = IntVar()
 cornerdiagonalB = IntVar()
-# customB = IntVar()
 
 fulldoorW = IntVar()
 drawersW = IntVar()
 microwaveW = IntVar()
-# customW = IntVar()
 
 fulldoorT = IntVar()
 ovenT = IntVar()
-# customT = IntVar()
 
 fulldoorV = IntVar()
 drawersV = IntVar()
@@ -596,8 +628,6 @@ num90B = IntVar()
 num90B.set(0)
 numDiaB = IntVar()
 numDiaB.set(0)
-# numCustB = IntVar()
-# numCustB.set(0)
 
 numFullW = IntVar()
 numFullW.set(0)
@@ -605,15 +635,11 @@ numDraW = IntVar()
 numDraW.set(0)
 numMicW = IntVar()
 numMicW.set(0)
-# numCustW = IntVar()
-# numCustW.set(0)
 
 numFullT = IntVar()
 numFullT.set(0)
 numOvenT = IntVar()
 numOvenT.set(0)
-# numCustT = IntVar()
-# numCustT.set(0)
 
 numFullV = IntVar()
 numFullV.set(0)
@@ -621,8 +647,6 @@ numDraV = IntVar()
 numDraV.set(0)
 numLinV = IntVar()
 numLinV.set(0)
-# numCustV = IntVar()
-# numCustV.set(0)
 
 materialThickness = 0.625
 toekick = 4.5
