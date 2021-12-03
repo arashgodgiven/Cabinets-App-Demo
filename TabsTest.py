@@ -8,7 +8,6 @@ root = Tk()
 root.title("Cabinets")
 root.configure(background='black')
 root.geometry("700x500")
-# myfont = tkinter.font.Font(root, family="alienleagueiileft.ttf")
 
 font1 = Font(
         family="Arial Rounded MT",
@@ -43,12 +42,16 @@ def railChangeUp():
         railNum.set(0)
     railType = Label(railFrame, text = "---------------------", fg='#fff', font=font3).grid(row=1, rowspan=2, column=1, padx = 10, sticky=W)
     railType = Label(railFrame, text = railList[railNum.get()], font=font3).grid(row=1, rowspan=2, column=1, padx = 10, sticky=W)
+    railSpaceLabel = Label(railFrame, text="---------------------", fg='#fff').grid(row=3, column=1, padx=10, sticky=W)
+    railSpaceLabel = Label(railFrame, text="Rail Space : " + str(railSpaceList[railNum.get()])).grid(row=3, column=1, padx=10, sticky=W)
 def railChangeDown():
     railNum.set(railNum.get() - 1)
     if railNum.get() < 0:
         railNum.set(4)
     railType = Label(railFrame, text = "---------------------", fg='#fff', font=font3).grid(row=1, rowspan=2, column=1, padx = 10, sticky=W)
     railType = Label(railFrame, text = railList[railNum.get()], font=font3).grid(row=1, rowspan=2, column=1, padx = 10, sticky=W)
+    railSpaceLabel = Label(railFrame, text="---------------------", fg='#fff').grid(row=3, column=1, padx=10, sticky=W)
+    railSpaceLabel = Label(railFrame, text="Rail Space : " + str(railSpaceList[railNum.get()])).grid(row=3, column=1, padx=10, sticky=W)
 
 railQLabel = Label(railFrame, text="What kind of railing for drawers?", font=font3)
 railQLabel.grid(row=0, column=0, columnspan=3, padx=10, pady=10, sticky=W+E)
@@ -57,11 +60,9 @@ railType = Label(railFrame, text = "---------------------", fg='#fff', font=font
 railType = Label(railFrame, text = railList[railNum.get()], font=font3).grid(row=1, rowspan=2, column=1, padx = 10, sticky=W)
 railUpButton = Button(railFrame, text="˄", command=railChangeUp).grid(row=1, rowspan=1, column=2, padx=10, sticky=W)
 railDownButton = Button(railFrame, text="˅", command=railChangeDown).grid(row=2, rowspan=1, column=2, padx=10, sticky=W)
-# emptyLabel = Label(railFrame, text = "----------------------------", fg='#fff').grid(row=2, column=1, pady=20)
+railSpaceLabel = Label(railFrame, text="Rail Space : " + str(railSpaceList[railNum.get()])).grid(row=3, column=1, padx=10, sticky=W)
 
 #For Material
-# materialQLabel = Label(main_frame, text="What type of material?")
-# materialQLabel.pack(fill=BOTH, anchor=CENTER)
 
 materialList = ["Ply Wood", "White Melamin", "Custom"]
 materialThicknessList = [0.625, 0.625, 0.625]
@@ -76,12 +77,16 @@ def materialChangeUp():
         materialNum.set(0)
     materialType = Label(materialFrame, text = "-----------------------", fg='#fff', font=font3).grid(row=1, rowspan=2, column=1, padx=10, sticky=W)
     materialType = Label(materialFrame, text = materialList[materialNum.get()], font=font3).grid(row=1, rowspan=2, column=1, padx=10, sticky=W)
+    materialThicknessLabel = Label(materialFrame, text="---------------------", fg='#fff').grid(row=3, column=1, padx=10, sticky=W)
+    materialThicknessLabel = Label(materialFrame, text="Thickness : " + str(materialThicknessList[materialNum.get()])).grid(row=3, column=1, padx=10, sticky=W)
 def materialChangeDown():
     materialNum.set(materialNum.get() - 1)
     if materialNum.get() < 0:
         materialNum.set(2)
     materialType = Label(materialFrame, text = "-----------------------", fg='#fff', font=font3).grid(row=1, rowspan=2, column=1, padx=10, sticky=W)
     materialType = Label(materialFrame, text = materialList[materialNum.get()], font=font3).grid(row=1, rowspan=2, column=1, padx=10, sticky=W)
+    materialThicknessLabel = Label(materialFrame, text="---------------------", fg='#fff').grid(row=3, column=1, padx=10, sticky=W)
+    materialThicknessLabel = Label(materialFrame, text="Thickness : " + str(materialThicknessList[materialNum.get()])).grid(row=3, column=1, padx=10, sticky=W)
 
 materialQLabel = Label(materialFrame, text="What type of material?", font=font3)
 materialQLabel.grid(row=0, column=0, columnspan=3, padx=10, pady=10, sticky=W+E)
@@ -90,6 +95,7 @@ materialType = Label(materialFrame, text = "-----------------------", fg='#fff',
 materialType = Label(materialFrame, text = materialList[materialNum.get()], font=font3).grid(row=1, rowspan=2, column=1, padx=10, sticky=W)
 materialUpButton = Button(materialFrame, text="˄", command=materialChangeUp).grid(row=1, rowspan=1, column=2, padx=10, sticky=W)
 materialDownButton = Button(materialFrame, text="˅", command=materialChangeDown).grid(row=2, rowspan=1, column=2, padx=10, sticky=W)
+materialThicknessLabel = Label(materialFrame, text="Thickness : " + str(materialThicknessList[materialNum.get()])).grid(row=3, column=1, padx=10, sticky=W)
 
 #Switch Button
 switch = IntVar()
@@ -99,30 +105,37 @@ statusFrame.pack()
 
 switchFrame = Frame(statusFrame)
 switchFrame.grid(row=0, rowspan=2, column=0, padx=10, sticky=E, ipadx = 15, ipady=15)
-defaultLabel = Label(switchFrame, text = "---------", fg='#fff', font=font3).grid(row=0, rowspan=2, column=0, padx=10, sticky=E)
-defaultLabel = Label(switchFrame, text="Standard", font=font3).grid(row=0, rowspan=2, column=0, padx=10, sticky=E)
-customLabel = Label(switchFrame, text = "---------", fg='#fff', font=font3).grid(row=0, rowspan=2, column=2, padx=10, sticky=W)
-customLabel = Label(switchFrame, text="Custom", font=font1).grid(row=0, rowspan=2, column=2, padx=10, sticky=W)
+switchQLabel = Label(switchFrame, text = "Standard or Custom measurements?", font=font3)
+switchQLabel.grid(row=0, column=0, columnspan=3, pady=10, sticky=E)
+defaultLabel = Label(switchFrame, text = "---------", fg='#fff', font=font3).grid(row=2, rowspan=2, column=0, padx=10, sticky=E)
+defaultLabel = Label(switchFrame, text="Standard", font=font3).grid(row=2, rowspan=2, column=0, padx=10, sticky=E)
+customLabel = Label(switchFrame, text = "---------", fg='#fff', font=font3).grid(row=2, rowspan=2, column=2, padx=10, sticky=W)
+customLabel = Label(switchFrame, text="Custom", font=font1).grid(row=2, rowspan=2, column=2, padx=10, sticky=W)
 def switchIt():
     if switch.get() == 0:
         switch.set(1)
-        dLabel = Label(switchFrame, text = "--------------", fg='#fff', font=font3).grid(row=0, rowspan=2, column=0, padx=10, sticky=E)
-        dLabel = Label(switchFrame, text="Standard", font=font3).grid(row=0, rowspan=2, column=0, padx=10, sticky=E)
-        cLabel = Label(switchFrame, text = "-----------", fg='#fff', font=font3).grid(row=0, rowspan=2, column=2, padx=10, sticky=W)
-        cLabel = Label(switchFrame, text="Custom", font=font1).grid(row=0, rowspan=2, column=2, padx=10, sticky=W)
-        switchButton = Button(switchFrame, text="⚫☷☷", command=switchIt).grid(row=0, rowspan=2, column=1, padx=5, sticky=W+E)
+        dLabel = Label(switchFrame, text = "--------------", fg='#fff', font=font3).grid(row=2, rowspan=2, column=0, padx=10, sticky=E)
+        dLabel = Label(switchFrame, text="Standard", font=font3).grid(row=2, rowspan=2, column=0, padx=10, sticky=E)
+        cLabel = Label(switchFrame, text = "-----------", fg='#fff', font=font3).grid(row=2, rowspan=2, column=2, padx=10, sticky=W)
+        cLabel = Label(switchFrame, text="Custom", font=font1).grid(row=2, rowspan=2, column=2, padx=10, sticky=W)
+        switchButton = Button(switchFrame, text="⚫☷☷", command=switchIt).grid(row=2, rowspan=2, column=1, padx=5, sticky=W+E)
     elif switch.get() == 1:
         switch.set(0)
-        cLabel = Label(switchFrame, text = "-----------", fg='#fff', font=font3).grid(row=0, rowspan=2, column=2, padx=10, sticky=W)
-        cLabel = Label(switchFrame, text="Custom", font=font3).grid(row=0, rowspan=2, column=2, padx=10, sticky=W)
-        dLabel = Label(switchFrame, text = "--------------", fg='#fff', font=font3).grid(row=0, rowspan=2, column=0, padx=10, sticky=E)
-        dLabel = Label(switchFrame, text="Standard", font=font1).grid(row=0, rowspan=2, column=0, padx=10, sticky=E)
-        switchButton = Button(switchFrame, text="☷☷⚫", command=switchIt).grid(row=0, rowspan=2, column=1, padx=5, sticky=W+E)
+        cLabel = Label(switchFrame, text = "-----------", fg='#fff', font=font3).grid(row=2, rowspan=2, column=2, padx=10, sticky=W)
+        cLabel = Label(switchFrame, text="Custom", font=font3).grid(row=2, rowspan=2, column=2, padx=10, sticky=W)
+        dLabel = Label(switchFrame, text = "--------------", fg='#fff', font=font3).grid(row=2, rowspan=2, column=0, padx=10, sticky=E)
+        dLabel = Label(switchFrame, text="Standard", font=font1).grid(row=2, rowspan=2, column=0, padx=10, sticky=E)
+        switchButton = Button(switchFrame, text="☷☷⚫", command=switchIt).grid(row=2, rowspan=2, column=1, padx=5, sticky=W+E)
 
 if switch.get() == 1:
-    switchButton = Button(switchFrame, text="⚫☷☷", command=switchIt).grid(row=0, rowspan=2, column=1, padx=5, sticky=W+E)
+    switchButton = Button(switchFrame, text="⚫☷☷", command=switchIt).grid(row=2, rowspan=2, column=1, padx=5, sticky=W+E)
 elif switch.get() == 0:
-    switchButton = Button(switchFrame, text="☷☷⚫", command=switchIt).grid(row=0, rowspan=2, column=1, padx=5, sticky=W+E)
+    switchButton = Button(switchFrame, text="☷☷⚫", command=switchIt).grid(row=2, rowspan=2, column=1, padx=5, sticky=W+E)
+
+#Next Page Button
+submitButtonP1 = Button(main_frame, text="Start", font=font3)
+submitButtonP1.pack(pady=20)
+
 
 # railQLabel = Label(main_frame, text="What kind of railing for drawers?", font = font1)
 # railQLabel.pack()
