@@ -112,9 +112,8 @@ def nextPage():
                     self.listParts.append(self.drawerBottom)
                     self.topStretcher = Part(2, "Top Stretcher", 4, self.width - 2 * self.MT, "-")
                     self.listParts.append(self.topStretcher)
-
-                    # self.bottom = Part(1, "Bottom", self.depth - self.MT, self.width - 2 * self.MT, "1L")
-                    # self.listParts.append(self.bottom)
+                    self.bottom = Part(1, "Bottom", self.depth - self.MT, self.width - 2 * self.MT, "1L")
+                    self.listParts.append(self.bottom)
 
                 if name == "Corner 90":
                     self.gable = Part(2, "Gable", self.depth - self.MT, self.height, "1L")
@@ -225,12 +224,12 @@ def nextPage():
     #FOR INCREASING B
     def checkedB(givenNumber):
         if itemsB[givenNumber].get() == 1:
-            tempNum = numB[givenNumber].get()
+            tempNum = amountB[givenNumber].get()
             tempNum = tempNum + 1
-            numB[givenNumber].set(tempNum)
+            amountB[givenNumber].set(tempNum)
         else:
             tempNum = 0
-            numB[givenNumber].set(0)
+            amountB[givenNumber].set(0)
         newLabel = Label(frameBase,text=f'{tempNum}').grid(row=givenNumber, column=2, padx=5, sticky=E)
 
     def decB(givenNumber, givenRow):
@@ -240,23 +239,23 @@ def nextPage():
             else:
                 givenNumber = givenNumber - 1
                 newLabel = Label(frameBase, text=f'{givenNumber}').grid(row=givenRow, column=2, padx=5, sticky=E)
-                numB[givenRow].set(givenNumber)
+                amountB[givenRow].set(givenNumber)
 
     def incB(givenNumber, givenRow):
         if itemsB[givenRow].get() == 1:
             givenNumber = givenNumber + 1
             newLabel = Label(frameBase,text=f'{givenNumber}').grid(row=givenRow, column=2, padx=5, sticky=E)
-            numB[givenRow].set(givenNumber)
+            amountB[givenRow].set(givenNumber)
 
     #FOR INCREASING W
     def checkedW(givenNumber):
         if itemsW[givenNumber].get() == 1:
-            tempNum = numW[givenNumber].get()
+            tempNum = amountW[givenNumber].get()
             tempNum = tempNum + 1
-            numW[givenNumber].set(tempNum)
+            amountW[givenNumber].set(tempNum)
         else:
             tempNum = 0
-            numW[givenNumber].set(0)
+            amountW[givenNumber].set(0)
         newLabel = Label(frameWall,text=f'{tempNum}').grid(row=givenNumber, column=2, padx=5, sticky=E)
 
     def decW(givenNumber, givenRow):
@@ -266,23 +265,23 @@ def nextPage():
             else:
                 givenNumber = givenNumber - 1
                 newLabel = Label(frameWall, text=f'{givenNumber}').grid(row=givenRow, column=2, padx=5, sticky=E)
-                numW[givenRow].set(givenNumber)
+                amountW[givenRow].set(givenNumber)
 
     def incW(givenNumber, givenRow):
         if itemsW[givenRow].get() == 1:
             givenNumber = givenNumber + 1
             newLabel = Label(frameWall,text=f'{givenNumber}').grid(row=givenRow, column=2, padx=5, sticky=E)
-            numW[givenRow].set(givenNumber)
+            amountW[givenRow].set(givenNumber)
 
     #FOR INCREASING T
     def checkedT(givenNumber):
         if itemsT[givenNumber].get() == 1:
-            tempNum = numT[givenNumber].get()
+            tempNum = amountT[givenNumber].get()
             tempNum = tempNum + 1
-            numT[givenNumber].set(tempNum)
+            amountT[givenNumber].set(tempNum)
         else:
             tempNum = 0
-            numT[givenNumber].set(0)
+            amountT[givenNumber].set(0)
         newLabel = Label(frameTall,text=f'{tempNum}').grid(row=givenNumber, column=2, padx=5, sticky=E)
 
     def decT(givenNumber, givenRow):
@@ -292,23 +291,23 @@ def nextPage():
             else:
                 givenNumber = givenNumber - 1
                 newLabel = Label(frameTall, text=f'{givenNumber}').grid(row=givenRow, column=2, padx=5, sticky=E)
-                numT[givenRow].set(givenNumber)
+                amountT[givenRow].set(givenNumber)
 
     def incT(givenNumber, givenRow):
         if itemsT[givenRow].get() == 1:
             givenNumber = givenNumber + 1
             newLabel = Label(frameTall,text=f'{givenNumber}').grid(row=givenRow, column=2, padx=5, sticky=E)
-            numT[givenRow].set(givenNumber)
+            amountT[givenRow].set(givenNumber)
 
     #FOR INCREASING V
     def checkedV(givenNumber):
         if itemsV[givenNumber].get() == 1:
-            tempNum = numV[givenNumber].get()
+            tempNum = amountV[givenNumber].get()
             tempNum = tempNum + 1
-            numV[givenNumber].set(tempNum)
+            amountV[givenNumber].set(tempNum)
         else:
             tempNum = 0
-            numV[givenNumber].set(0)
+            amountV[givenNumber].set(0)
         newLabel = Label(frameVanity,text=f'{tempNum}').grid(row=givenNumber, column=2, padx=5, sticky=E)
 
     def decV(givenNumber, givenRow):
@@ -318,13 +317,13 @@ def nextPage():
             else:
                 givenNumber = givenNumber - 1
                 newLabel = Label(frameVanity, text=f'{givenNumber}').grid(row=givenRow, column=2, padx=5, sticky=E)
-                numV[givenRow].set(givenNumber)
+                amountV[givenRow].set(givenNumber)
 
     def incV(givenNumber, givenRow):
         if itemsV[givenRow].get() == 1:
             givenNumber = givenNumber + 1
             newLabel = Label(frameVanity,text=f'{givenNumber}').grid(row=givenRow, column=2, padx=5, sticky=E)
-            numV[givenRow].set(givenNumber)
+            amountV[givenRow].set(givenNumber)
 
     #CUSTOM
     def checkedC():
@@ -365,7 +364,7 @@ def nextPage():
 
     #Workspace Scrollbar
     workspace_backFrame = LabelFrame(app_frame, text="Workspace", padx=0, pady=5)
-    workspace_backFrame.grid(row=1, rowspan = 5, column=1, columnspan=18, padx=0, pady=5, sticky=W+E+N+S)
+    workspace_backFrame.grid(row=1, rowspan = 5, column=1, columnspan=21, padx=0, pady=5, sticky=W+E+N+S)
     workspace_canvas = Canvas(workspace_backFrame)
     workspace_canvas.pack(side=LEFT, fill=BOTH, expand=1)
     workspace_scrollbar = ttk.Scrollbar(workspace_backFrame, orient=VERTICAL, command=workspace_canvas.yview)
@@ -380,7 +379,7 @@ def nextPage():
 
     #Cutlist Scrollbar
     cutlist_backFrame = LabelFrame(app_frame, text="Cutlist", padx=5, pady=5)
-    cutlist_backFrame.grid(row=1, rowspan = 5, column=21, columnspan=5, padx=5, pady=5, sticky=W+E+N+S)
+    cutlist_backFrame.grid(row=1, rowspan = 5, column=22, columnspan=5, padx=5, pady=5, sticky=W+E+N+S)
     cutlist_canvas = Canvas(cutlist_backFrame)
     cutlist_canvas.pack(side=LEFT, fill=BOTH, expand=1)
     cutlist_scrollbar = ttk.Scrollbar(cutlist_backFrame, orient=VERTICAL, command=cutlist_canvas.yview)
@@ -392,6 +391,18 @@ def nextPage():
 
     for newthing in range(40):
         Label(cutlist_frame, text=".").grid(row = newthing+30, column = 0, pady=10, padx=10)
+
+    baseBinary = LabelFrame(workspace_frame, text="Base", padx=5, pady=5)
+    baseBinary.grid(row=0, column=0, padx=5, pady=5, sticky=W+E)
+
+    wallBinary = LabelFrame(workspace_frame, text="Wall", padx=5, pady=5)
+    wallBinary.grid(row=1, column=0, padx=5, pady=5, sticky=W+E)
+
+    tallBinary = LabelFrame(workspace_frame, text="Tall", padx=5, pady=5)
+    tallBinary.grid(row=2, column=0, padx=5, pady=5, sticky=W+E)
+
+    vanityBinary = LabelFrame(workspace_frame, text="Vanity", padx=5, pady=5)
+    vanityBinary.grid(row=3, column=0, padx=5, pady=5, sticky=W+E)
 
     class Send:
         def __init__(self, parent, givenList):
@@ -413,44 +424,146 @@ def nextPage():
                 self.i = self.i + 1
 
     class Show:
-        def __init__(self, parent, givenRow, givenIndex, givenString):
+        def __init__(self, parent, givenIndex, givenString):
             self.index = givenIndex
             self.category = givenString
-            self.widthLabel = Label(parent, text="Width: ", padx=10, pady=5)
-            self.widthLabel.grid(row = givenRow, column=1)
-            self.widthEntry = Entry(parent, width = 10)
-            self.widthEntry.grid(row = givenRow, column=2)
-            self.heightLabel = Label(parent, text="height: ", padx=10, pady=5, anchor=E)
-            self.heightLabel.grid(row = givenRow, column=3)
-            self.heightEntry = Entry(parent, width = 10)
-            self.heightEntry.grid(row = givenRow, column=4)
-            if switch.get() == 1:
-                self.heightEntry.insert(0, 34.75)
-            self.depthLabel = Label(parent, text="Depth: ", padx=10, pady=5, anchor=E)
-            self.depthLabel.grid(row = givenRow, column=5)
-            self.depthEntry = Entry(parent, width = 10)
-            self.depthEntry.grid(row = givenRow, column=6)
-            if switch.get() == 1:
-                self.depthEntry.insert(0, 23.75)
+            self.columnIndex = 1
+            self.rowIndex = rowNumInShow.get()
+            self.drawerQty = 0
+
+            def placement():
+                self.columnIndex += 1
+                if self.columnIndex > 6:
+                    self.rowIndex = rowNumInShow.get()
+                    self.columnIndex = 1
+                    self.rowIndex += 1
+                    rowNumInShow.set(self.rowIndex + 1)
+
+            def width_height_depth(givenHeight, givenDepth):
+                self.widthLabel = Label(parent, text="Width: ", padx=10, pady=5)
+                self.widthLabel.grid(row=self.rowIndex, column=self.columnIndex)
+                placement()
+                self.widthEntry = Entry(parent, width = 10)
+                self.widthEntry.grid(row=self.rowIndex, column=self.columnIndex)
+                placement()
+
+                self.heightLabel = Label(parent, text="height: ", padx=10, pady=5, anchor=E)
+                self.heightLabel.grid(row=self.rowIndex, column=self.columnIndex)
+                placement()
+                self.heightEntry = Entry(parent, width = 10)
+                self.heightEntry.grid(row=self.rowIndex, column=self.columnIndex)
+                placement()
+                self.heightEntry.insert(0, givenHeight)
+
+                self.depthLabel = Label(parent, text="Depth: ", padx=10, pady=5, anchor=E)
+                self.depthLabel.grid(row=self.rowIndex, column=self.columnIndex)
+                placement()
+                self.depthEntry = Entry(parent, width = 10)
+                self.depthEntry.grid(row=self.rowIndex, column=self.columnIndex)
+                placement()
+                self.depthEntry.insert(0, givenDepth)
+
+            def shelf():
+                self.shelfLabel = Label(parent, text = "Shelves #: ", padx=10, pady=5, anchor=E)
+                self.shelfLabel.grid(row=self.rowIndex, column=self.columnIndex)
+                placement()
+                self.shelfEntry = Entry(parent, width = 10)
+                self.shelfEntry.grid(row=self.rowIndex, column=self.columnIndex)
+                placement()
+
+            def toeKick():
+                self.kickLabel = Label(parent, text = "Toe Kick: ", padx=10, pady=5, anchor=E)
+                self.kickLabel.grid(row=self.rowIndex, column=self.columnIndex)
+                placement()
+                self.kickEntry = Entry(parent, width = 10)
+                self.kickEntry.grid(row=self.rowIndex, column=self.columnIndex)
+                placement()
+
+            def secondSide():
+                self.secSideLabel = Label(parent, text = "Sec Side: ", padx=10, pady=5, anchor=E)
+                self.secSideLabel.grid(row=self.rowIndex, column=self.columnIndex)
+                placement()
+                self.secSideEntry = Entry(parent, width = 10)
+                self.secSideEntry.grid(row=self.rowIndex, column=self.columnIndex)
+                placement()
+
             self.MTLabel1 = Label(parent, text = "M.T. : " + str(materialThickness), padx = 10, pady = 5, anchor = E)
-            self.MTLabel1.grid(row = givenRow + 1, column=0)
-            self.shelfLabel = Label(parent, text = "Shelves #: ", padx=10, pady=5, anchor=E)
-            self.shelfLabel.grid(row = givenRow + 1, column=1)
-            self.shelfEntry = Entry(parent, width = 10)
-            self.shelfEntry.grid(row = givenRow + 1, column=2)
+            self.MTLabel1.grid(row=self.rowIndex + 1, column=0)
 
-            self.secSideLabel = Label(parent, text = "Sec Side: ", padx=10, pady=5, anchor=E)
-            self.secSideLabel.grid(row = givenRow + 1, column=3)
-            self.secSideEntry = Entry(parent, width = 10)
-            self.secSideEntry.grid(row = givenRow + 1, column=4)
+            if self.category == "Base":
+                if switch.get() == 1:
+                    width_height_depth(34.75, 23.75)
+                elif switch.get() == 0:
+                    width_height_depth(0, 0)
 
-            self.kickLabel = Label(parent, text = "Toe Kick: ", padx=10, pady=5, anchor=E)
-            self.kickLabel.grid(row = givenRow + 1, column=5)
-            self.kickEntry = Entry(parent, width = 10)
-            self.kickEntry.grid(row = givenRow + 1, column=6)
+                self.text = textB[self.index]
+                if self.text == textB[0]:
+                    shelf()
+                    toeKick()
+
+                elif self.text == textB[1]:
+                    self.drawerNumLabel = Label(parent, text = "Drawer #: ", padx=10, pady=5, anchor=E)
+                    self.drawerNumLabel.grid(row=self.rowIndex, column=self.columnIndex)
+                    placement()
+                    self.drawerNumEntry = Entry(parent, width = 10)
+                    self.drawerNumEntry.grid(row=self.rowIndex, column=self.columnIndex)
+                    placement()
+                    if switch.get() == 1:
+                        self.drawerNumEntry.insert(0, 3)
+
+                    def generateDrawerEntries():
+                        self.drawerHeightLabel = Label(parent, text = "Drawer height : ", padx=10, pady=5, anchor=E)
+                        self.drawerHeightLabel.grid(row=self.rowIndex + 1, column=1)
+                        self.drawerQty = int(self.drawerNumEntry.get())
+                        for i in range(self.drawerQty):
+                            self.drawerHeightEntry = Entry(parent, width = 10)
+                            self.drawerHeightEntry.grid(row=self.rowIndex + 1, column=self.columnIndex - 2, padx=3, pady=5)
+                            self.drawerHeightEntry.insert(0, str(i+1) + ".")
+                            placement()
+
+                    self.generateDrawerButton = Button(parent, text="˅", command=generateDrawerEntries)
+                    self.generateDrawerButton.grid(row=self.rowIndex, column=self.columnIndex, padx=3, pady=3)
+                    placement()
+
+                    self.railSpaceLabel = Label(parent, text = "Railing : " + railList[railNum.get()] + " , " + str(railSpaceList[railNum.get()]), padx = 10, pady = 5, anchor = E)
+                    self.railSpaceLabel.grid(row=self.rowIndex + 1, column=0)
+                    rowNumInShow.set(rowNumInShow.get() + 1)
+                    # refreshPage()
+
+                elif self.text == textB[2] or self.text == textB[3]:
+                    shelf()
+                    secondSide()
+                    toeKick()
+
+            elif self.category == "Wall":
+                if switch.get() == 1:
+                    width_height_depth(0, 11.75)
+                elif switch.get() == 0:
+                    width_height_depth(0, 0)
+                shelf()
+                self.text = textW[self.index]
+                if self.text == textB[1]:
+                    secondSide()
+
+            elif self.category == "Tall":
+                if switch.get() == 1:
+                    width_height_depth(0, 23.75)
+                elif switch.get() == 0:
+                    width_height_depth(0, 0)
+                shelf()
+                toeKick()
+
+            elif self.category == "Vanity":
+                if switch.get() == 1:
+                    width_height_depth(30.25, 20.75)
+                elif switch.get() == 0:
+                    width_height_depth(0, 0)
+                shelf()
+                toeKick()
 
             self.sendButton = Button(parent, text=">", command=self.send)
-            self.sendButton.grid(row = givenRow, column=7, padx=10, pady=5)
+            self.sendButton.grid(row=self.rowIndex, column=7, padx=10, pady=5)
+            print(rowNumInShow.get())
 
         def send(self):
             self.width = float(self.widthEntry.get())
@@ -510,70 +623,71 @@ def nextPage():
                 showOutputs = Send(customCutlist, listC)
 
     def show():
-        baseBinary = LabelFrame(workspace_frame, text="Base", padx=5, pady=5)
-        baseBinary.grid(row=0, column=0, padx=5, pady=5, sticky=W+E)
 
         i = 0
-        j = 0
 
         for item in itemsB:
             if item.get() == 1:
-                amountB = numB[i].get()
-                for count in range(amountB):
-                    itemLabelB = Label(baseBinary, text=textB[i], font = ('Helvetiva', 10, 'bold'), padx=7, pady=5).grid(row=j, column=0, sticky=W+E)
+                numB = amountB[i].get()
+                for count in range(numB):
+                    r = rowNumInShow.get()
+                    itemLabelB = Label(baseBinary, text=textB[i], font = ('Helvetica', 10, 'bold'), padx=7, pady=5).grid(row=r, column=0, sticky=W+E)
 
-                    receiveInputsB = Show(baseBinary, j, i, "Base")
+                    receiveInputsB = Show(baseBinary, i, "Base")
 
-                    j = j + 2
+                    # r = r + 2
+                amountB[i].set(0)
             i = i + 1
-
-        wallBinary = LabelFrame(workspace_frame, text="Wall", padx=5, pady=5)
-        wallBinary.grid(row=1, column=0, padx=5, pady=5, sticky=W+E)
+        # rowNumInShow.set(r)
+        #update frame base for correct quantity(0)
 
         i = 0
-        j = 0
+        r = rowNumInShow.get()
         for item in itemsW:
             if item.get() == 1:
-                amountW = numW[i].get()
-                for count in range(amountW):
-                    itemLabelW = Label(wallBinary, text=textW[i], font = ('Helvetiva', 10, 'bold'), padx=7, pady=5).grid(row=j, column=0, sticky=W+E)
+                numW = amountW[i].get()
+                for count in range(numW):
+                    itemLabelW = Label(wallBinary, text=textW[i], font = ('Helvetica', 10, 'bold'), padx=7, pady=5).grid(row=r, column=0, sticky=W+E)
 
-                    receiveInputsW = Show(wallBinary, j, i, "Wall")
+                    receiveInputsW = Show(wallBinary, i, "Wall")
 
-                    j = j + 2
+                    r = r + 2
+                amountW[i].set(0)
             i = i + 1
-
-        tallBinary = LabelFrame(workspace_frame, text="Tall", padx=5, pady=5)
-        tallBinary.grid(row=2, column=0, padx=5, pady=5, sticky=W+E)
+        # rowNumInShow.set(r)
+        #update frame base for correct quantity(0)
 
         i = 0
-        j = 0
+        r = rowNumInShow.get()
         for item in itemsT:
             if item.get() == 1:
-                amountT = numT[i].get()
-                for count in range(amountT):
-                    itemLabelT = Label(tallBinary, text=textT[i], font = ('Helvetiva', 10, 'bold'), padx=7, pady=5).grid(row=j, column=0, sticky=W+E)
+                numT = amountT[i].get()
+                for count in range(numT):
+                    itemLabelT = Label(tallBinary, text=textT[i], font = ('Helvetica', 10, 'bold'), padx=7, pady=5).grid(row=r, column=0, sticky=W+E)
 
-                    receiveInputsT = Show(tallBinary, j, i, "Tall")
+                    receiveInputsT = Show(tallBinary, i, "Tall")
 
-                    j = j + 2
+                    r = r + 2
+                amountT[i].set(0)
             i = i + 1
-
-        vanityBinary = LabelFrame(workspace_frame, text="Vanity", padx=5, pady=5)
-        vanityBinary.grid(row=3, column=0, padx=5, pady=5, sticky=W+E)
+        # rowNumInShow.set(r)
+        #update frame base for correct quantity(0)
 
         i = 0
-        j = 0
+        r = rowNumInShow.get()
         for item in itemsV:
             if item.get() == 1:
-                amountV = numV[i].get()
-                for count in range(amountV):
-                    itemLabelV = Label(vanityBinary, text=textV[i], font = ('Helvetiva', 10, 'bold'), padx=7, pady=5).grid(row=j, column=0, sticky=W+E)
+                numV = amountV[i].get()
+                for count in range(numV):
+                    itemLabelV = Label(vanityBinary, text=textV[i], font = ('Helvetica', 10, 'bold'), padx=7, pady=5).grid(row=r, column=0, sticky=W+E)
 
-                    receiveInputsV = Show(vanityBinary, j, i, "Vanity")
+                    receiveInputsV = Show(vanityBinary, i, "Vanity")
 
-                    j = j + 2
+                    r = r + 2
+                amountV[i].set(0)
             i = i + 1
+        # rowNumInShow.set(r)
+        #update frame base for correct quantity(0)
 
         customBinary = LabelFrame(workspace_frame, text="Custom", padx=5, pady=5)
         customBinary.grid(row=3, column=0, padx=5, pady=5, sticky=W+E)
@@ -582,9 +696,9 @@ def nextPage():
         j = 0
         amountC = numCustom.get()
         for count in range(amountC):
-            itemLabelC = Label(customBinary, text = "Custom" + str(i + 1), font = ('Helvetiva', 10, 'bold'), padx=7, pady=5).grid(row=j, column=0, sticky=W+E)
+            itemLabelC = Label(customBinary, text = "Custom" + str(i + 1), font = ('Helvetica', 10, 'bold'), padx=7, pady=5).grid(row=j, column=0, sticky=W+E)
 
-            receiveInputsC = Show(customBinary, j, i, "Custom")
+            receiveInputsC = Show(customBinary, i, "Custom")
 
             j += 2
             i += 1
@@ -615,33 +729,36 @@ def nextPage():
     numCustom = IntVar()
     numCustom.set(0)
 
-    numFullB = IntVar()
-    numFullB.set(0)
-    numDraB = IntVar()
-    numDraB.set(0)
-    num90B = IntVar()
-    num90B.set(0)
-    numDiaB = IntVar()
-    numDiaB.set(0)
+    amountFullB = IntVar()
+    amountFullB.set(0)
+    amountDraB = IntVar()
+    amountDraB.set(0)
+    amount90B = IntVar()
+    amount90B.set(0)
+    amountDiaB = IntVar()
+    amountDiaB.set(0)
 
-    numFullW = IntVar()
-    numFullW.set(0)
-    numDraW = IntVar()
-    numDraW.set(0)
-    numMicW = IntVar()
-    numMicW.set(0)
+    amountFullW = IntVar()
+    amountFullW.set(0)
+    amountDraW = IntVar()
+    amountDraW.set(0)
+    amountMicW = IntVar()
+    amountMicW.set(0)
 
-    numFullT = IntVar()
-    numFullT.set(0)
-    numOvenT = IntVar()
-    numOvenT.set(0)
+    amountFullT = IntVar()
+    amountFullT.set(0)
+    amountOvenT = IntVar()
+    amountOvenT.set(0)
 
-    numFullV = IntVar()
-    numFullV.set(0)
-    numDraV = IntVar()
-    numDraV.set(0)
-    numLinV = IntVar()
-    numLinV.set(0)
+    amountFullV = IntVar()
+    amountFullV.set(0)
+    amountDraV = IntVar()
+    amountDraV.set(0)
+    amountLinV = IntVar()
+    amountLinV.set(0)
+
+    rowNumInShow = IntVar()
+    rowNumInShow.set(0)
 
     materialThickness = 0.625
     toekick = 4.5
@@ -650,16 +767,16 @@ def nextPage():
 
     itemsB = [fulldoorB, drawersB, corner90B, cornerdiagonalB]
     textB = ["Full Door", "Drawers", "Corner 90", "Corner Diagonal"]
-    numB = [numFullB, numDraB, num90B, numDiaB]
+    amountB = [amountFullB, amountDraB, amount90B, amountDiaB]
     itemsW = [fulldoorW, drawersW, microwaveW]
     textW = ["Full Door", "Corner 90", "Microwave Slot"]
-    numW = [numFullW, numDraW, numMicW]
+    amountW = [amountFullW, amountDraW, amountMicW]
     itemsT = [fulldoorT, ovenT]
     textT = ["Full Door", "Oven Slot"]
-    numT = [numFullT, numOvenT]
+    amountT = [amountFullT, amountOvenT]
     itemsV = [fulldoorV, drawersV, linentowerV]
     textV = ["Full Door", "Drawers", "Linen Tower"]
-    numV = [numFullV, numDraV, numLinV]
+    amountV = [amountFullV, amountDraV, amountLinV]
 
     #Base Frame
     frameBase = LabelFrame(app_frame, text="Base", padx=5, pady=5)
@@ -673,89 +790,73 @@ def nextPage():
     check3DB = Checkbutton(frameBase, text=textB[1], variable = itemsB[1], onvalue=1, offvalue=0, command = lambda: checkedB(1)).grid(row=1, column=0, sticky=W)
     check90B = Checkbutton(frameBase, text=textB[2], variable = itemsB[2], onvalue=1, offvalue=0, command = lambda: checkedB(2)).grid(row=2, column=0, sticky=W)
     checkDiaB = Checkbutton(frameBase, text=textB[3], variable = itemsB[3], onvalue=1, offvalue=0, command = lambda: checkedB(3)).grid(row=3, column=0, sticky=W)
-    # checkCustB = Checkbutton(frameBase, text=textB[4], variable = itemsB[4], onvalue=1, offvalue=0, command = lambda: checkedB(4)).grid(row=4, column=0, sticky=W)
 
-    decFullB = Button(frameBase, text="-", command = lambda: decB(numB[0].get(), 0)).grid(row=0, column=1, sticky=E)
-    dec3DB = Button(frameBase, text="-", command = lambda: decB(numB[1].get(), 1)).grid(row=1, column=1, sticky=E)
-    dec90B = Button(frameBase, text="-", command = lambda: decB(numB[2].get(), 2)).grid(row=2, column=1, sticky=E)
-    decDiaB = Button(frameBase, text="-", command = lambda: decB(numB[3].get(), 3)).grid(row=3, column=1, sticky=E)
-    # decCustB = Button(frameBase, text="-", command = lambda: decB(numB[4].get(), 4)).grid(row=4, column=1, sticky=E)
+    decFullB = Button(frameBase, text="-", command = lambda: decB(amountB[0].get(), 0)).grid(row=0, column=1, sticky=E)
+    dec3DB = Button(frameBase, text="-", command = lambda: decB(amountB[1].get(), 1)).grid(row=1, column=1, sticky=E)
+    dec90B = Button(frameBase, text="-", command = lambda: decB(amountB[2].get(), 2)).grid(row=2, column=1, sticky=E)
+    decDiaB = Button(frameBase, text="-", command = lambda: decB(amountB[3].get(), 3)).grid(row=3, column=1, sticky=E)
 
-    incFullB = Button(frameBase, text="+", command = lambda: incB(numB[0].get(), 0)).grid(row=0, column=3, sticky=E)
-    inc3DB = Button(frameBase, text="+", command = lambda: incB(numB[1].get(), 1)).grid(row=1, column=3, sticky=E)
-    inc90B = Button(frameBase, text="+", command = lambda: incB(numB[2].get(), 2)).grid(row=2, column=3, sticky=E)
-    incDiaB = Button(frameBase, text="+", command = lambda: incB(numB[3].get(), 3)).grid(row=3, column=3, sticky=E)
-    # incCustB = Button(frameBase, text="+", command = lambda: incB(numB[4].get(), 4)).grid(row=4, column=3, sticky=E)
+    incFullB = Button(frameBase, text="+", command = lambda: incB(amountB[0].get(), 0)).grid(row=0, column=3, sticky=E)
+    inc3DB = Button(frameBase, text="+", command = lambda: incB(amountB[1].get(), 1)).grid(row=1, column=3, sticky=E)
+    inc90B = Button(frameBase, text="+", command = lambda: incB(amountB[2].get(), 2)).grid(row=2, column=3, sticky=E)
+    incDiaB = Button(frameBase, text="+", command = lambda: incB(amountB[3].get(), 3)).grid(row=3, column=3, sticky=E)
 
     #Wall Frame
     frameWall = LabelFrame(app_frame, text="Wall", padx=5, pady=5)
     frameWall.grid(row=2, column=0, padx=5, pady=5, sticky=W+E)
     i = 0
     for item in textW:
-        # wallCheckbutton = Checkbutton(frameWall, text=item, variable = itemsW[i], onvalue=1, offvalue=0).grid(row=i, column=0, sticky=W)
         newWL = Label(frameWall, text="0").grid(row=i, column=2, padx=5, sticky=E)
-        # newB = Button(frameWall, text=">", command = lambda: clicked(numW[i].get())).grid(row=0, column=2, sticky=E)
         i = i + 1
 
     checkFullW = Checkbutton(frameWall, text=textW[0], variable = itemsW[0], onvalue=1, offvalue=0, command = lambda: checkedW(0)).grid(row=0, column=0, sticky=W)
     checkDraW = Checkbutton(frameWall, text=textW[1], variable = itemsW[1], onvalue=1, offvalue=0, command = lambda: checkedW(1)).grid(row=1, column=0, sticky=W)
     checkMicW = Checkbutton(frameWall, text=textW[2], variable = itemsW[2], onvalue=1, offvalue=0, command = lambda: checkedW(2)).grid(row=2, column=0, sticky=W)
-    # checkCustW = Checkbutton(frameWall, text=textW[3], variable = itemsW[3], onvalue=1, offvalue=0, command = lambda: checkedW(3)).grid(row=3, column=0, sticky=W)
 
-    decFullW = Button(frameWall, text="-", command = lambda: decW(numW[0].get(), 0)).grid(row=0, column=1, sticky=W+E)
-    decDraW = Button(frameWall, text="-", command = lambda: decW(numW[1].get(), 1)).grid(row=1, column=1, sticky=W+E)
-    decMicW = Button(frameWall, text="-", command = lambda: decW(numW[2].get(), 2)).grid(row=2, column=1, sticky=W+E)
-    # decCustW = Button(frameWall, text="-", command = lambda: decW(numW[3].get(), 3)).grid(row=3, column=1, sticky=W+E)
+    decFullW = Button(frameWall, text="-", command = lambda: decW(amountW[0].get(), 0)).grid(row=0, column=1, sticky=W+E)
+    decDraW = Button(frameWall, text="-", command = lambda: decW(amountW[1].get(), 1)).grid(row=1, column=1, sticky=W+E)
+    decMicW = Button(frameWall, text="-", command = lambda: decW(amountW[2].get(), 2)).grid(row=2, column=1, sticky=W+E)
 
-    incFullW = Button(frameWall, text="+", command = lambda: incW(numW[0].get(), 0)).grid(row=0, column=3, sticky=W+E)
-    incDraW = Button(frameWall, text="+", command = lambda: incW(numW[1].get(), 1)).grid(row=1, column=3, sticky=W+E)
-    incMicW = Button(frameWall, text="+", command = lambda: incW(numW[2].get(), 2)).grid(row=2, column=3, sticky=W+E)
-    # incCustW = Button(frameWall, text="+", command = lambda: incW(numW[3].get(), 3)).grid(row=3, column=3, sticky=W+E)
+    incFullW = Button(frameWall, text="+", command = lambda: incW(amountW[0].get(), 0)).grid(row=0, column=3, sticky=W+E)
+    incDraW = Button(frameWall, text="+", command = lambda: incW(amountW[1].get(), 1)).grid(row=1, column=3, sticky=W+E)
+    incMicW = Button(frameWall, text="+", command = lambda: incW(amountW[2].get(), 2)).grid(row=2, column=3, sticky=W+E)
 
     #Tall Frame
     frameTall = LabelFrame(app_frame, text="Tall", padx=5, pady=5)
     frameTall.grid(row=3, column=0, padx=5, pady=5, sticky=W+E)
     i = 0
     for item in textT:
-        # tallCheckbutton = Checkbutton(frameTall, text=item, variable = itemsT[i], onvalue=1, offvalue=0).grid(row=i, column=0, sticky=W)
         newTL = Label(frameTall, text="0").grid(row=i, column=2, padx=5, sticky=E)
         i = i + 1
 
     checkFullT = Checkbutton(frameTall, text=textT[0], variable = itemsT[0], onvalue=1, offvalue=0, command = lambda: checkedT(0)).grid(row=0, column=0, sticky=W)
     checkOvenT = Checkbutton(frameTall, text=textT[1], variable = itemsT[1], onvalue=1, offvalue=0, command = lambda: checkedT(1)).grid(row=1, column=0, sticky=W)
-    # checkCustT = Checkbutton(frameTall, text=textT[2], variable = itemsT[2], onvalue=1, offvalue=0, command = lambda: checkedT(2)).grid(row=2, column=0, sticky=W)
 
-    decFullT = Button(frameTall, text="-", command = lambda: decT(numT[0].get(), 0)).grid(row=0, column=1, sticky=E)
-    decOvenT = Button(frameTall, text="-", command = lambda: decT(numT[1].get(), 1)).grid(row=1, column=1, sticky=E)
-    # decCustT = Button(frameTall, text="-", command = lambda: decT(numT[2].get(), 2)).grid(row=2, column=1, sticky=E)
+    decFullT = Button(frameTall, text="-", command = lambda: decT(amountT[0].get(), 0)).grid(row=0, column=1, sticky=E)
+    decOvenT = Button(frameTall, text="-", command = lambda: decT(amountT[1].get(), 1)).grid(row=1, column=1, sticky=E)
 
-    incFullT = Button(frameTall, text="+", command = lambda: incT(numT[0].get(), 0)).grid(row=0, column=3, sticky=E)
-    incOvenT = Button(frameTall, text="+", command = lambda: incT(numT[1].get(), 1)).grid(row=1, column=3, sticky=E)
-    # incCustT = Button(frameTall, text="+", command = lambda: incT(numT[2].get(), 2)).grid(row=2, column=3, sticky=E)
+    incFullT = Button(frameTall, text="+", command = lambda: incT(amountT[0].get(), 0)).grid(row=0, column=3, sticky=E)
+    incOvenT = Button(frameTall, text="+", command = lambda: incT(amountT[1].get(), 1)).grid(row=1, column=3, sticky=E)
 
     #Vanity Frame
     frameVanity = LabelFrame(app_frame, text="Vanity", padx=5, pady=5)
     frameVanity.grid(row=4, column=0, padx=5, pady=5, sticky=W+E)
     i = 0
     for item in textV:
-        # vanityCheckbutton = Checkbutton(frameVanity, text=item, variable = itemsV[i], onvalue=1, offvalue=0).grid(row=i, column=0, sticky=W)
         newVL = Label(frameVanity, text="0").grid(row=i, column=2, padx=5, sticky=E)
         i = i + 1
 
     checkFullV = Checkbutton(frameVanity, text=textV[0], variable = itemsV[0], onvalue=1, offvalue=0, command = lambda: checkedV(0)).grid(row=0, column=0, sticky=W)
     checkDraV = Checkbutton(frameVanity, text=textV[1], variable = itemsV[1], onvalue=1, offvalue=0, command = lambda: checkedV(1)).grid(row=1, column=0, sticky=W)
     checkLinV = Checkbutton(frameVanity, text=textV[2], variable = itemsV[2], onvalue=1, offvalue=0, command = lambda: checkedV(2)).grid(row=2, column=0, sticky=W)
-    # checkCustV = Checkbutton(frameVanity, text=textV[3], variable = itemsV[3], onvalue=1, offvalue=0, command = lambda: checkedV(3)).grid(row=3, column=0, sticky=W)
 
-    decFullV = Button(frameVanity, text="-", command = lambda: decV(numV[0].get(), 0)).grid(row=0, column=1, sticky=E)
-    decDraV = Button(frameVanity, text="-", command = lambda: decV(numV[1].get(), 1)).grid(row=1, column=1, sticky=E)
-    decLinV = Button(frameVanity, text="-", command = lambda: decV(numV[2].get(), 2)).grid(row=2, column=1, sticky=E)
-    # decCustV = Button(frameVanity, text="-", command = lambda: decV(numV[3].get(), 3)).grid(row=3, column=1, sticky=E)
+    decFullV = Button(frameVanity, text="-", command = lambda: decV(amountV[0].get(), 0)).grid(row=0, column=1, sticky=E)
+    decDraV = Button(frameVanity, text="-", command = lambda: decV(amountV[1].get(), 1)).grid(row=1, column=1, sticky=E)
+    decLinV = Button(frameVanity, text="-", command = lambda: decV(amountV[2].get(), 2)).grid(row=2, column=1, sticky=E)
 
-    incFullV = Button(frameVanity, text="+", command = lambda: incV(numV[0].get(), 0)).grid(row=0, column=3, sticky=E)
-    incDraV = Button(frameVanity, text="+", command = lambda: incV(numV[1].get(), 1)).grid(row=1, column=3, sticky=E)
-    incLinV = Button(frameVanity, text="+", command = lambda: incV(numV[2].get(), 2)).grid(row=2, column=3, sticky=E)
-    # incCustV = Button(frameVanity, text="+", command = lambda: incV(numV[3].get(), 3)).grid(row=3, column=3, sticky=E)
+    incFullV = Button(frameVanity, text="+", command = lambda: incV(amountV[0].get(), 0)).grid(row=0, column=3, sticky=E)
+    incDraV = Button(frameVanity, text="+", command = lambda: incV(amountV[1].get(), 1)).grid(row=1, column=3, sticky=E)
+    incLinV = Button(frameVanity, text="+", command = lambda: incV(amountV[2].get(), 2)).grid(row=2, column=3, sticky=E)
 
     #Custom Frame
     frameCustom = LabelFrame(app_frame, text = "Custom", padx = 5, pady = 5)
@@ -768,9 +869,8 @@ def nextPage():
     submit_base_button = Button(app_frame, text="Submit", command=show).grid(row=6, column=0, sticky=W+E, pady=30)
     submit_workspace_button = Button(app_frame, text="Generate Cutlist").grid(row=6, column=18, sticky=W+E, pady=30)
 
-    for dotthing in range(17):
+    for dotthing in range(30):
         Label(app_frame, text="........ ").grid(row=7, column=dotthing)
-
 
 #-------------------------------------------------------------------------------
 
@@ -885,13 +985,5 @@ elif switch.get() == 0:
 #Next Page Button
 submitButtonP1 = Button(main_frame, text="Start", font=font3, command=nextPage)
 submitButtonP1.pack(pady=20)
-
-
-# railQLabel = Label(main_frame, text="What kind of railing for drawers?", font = font1)
-# railQLabel.pack()
-# railQLabel = Label(main_frame, text="What kind of railing for drawers?", font = font2)
-# railQLabel.pack()
-# railQLabel = Label(main_frame, text="What kind of railing for drawers?", font = font3)
-# railQLabel.pack()
 
 root.mainloop()
