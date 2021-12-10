@@ -81,7 +81,11 @@ def nextPage():
                     self.listParts.append(self.gable)
                     self.bottom = Part(1, "Bottom", self.depth - self.MT, self.width - 2 * self.MT, "1S")
                     self.listParts.append(self.bottom)
+<<<<<<< Updated upstream
                     self.kick = Part(1, "Kick", self.toeKick - 0.25, self.width - 2 * self.MT, "-")
+=======
+                    self.kick = Part(1, "Kick", self.toeKick - 0.25, self.width - 2 * self.MT, "-")  #TOEKICK -0.25
+>>>>>>> Stashed changes
                     self.listParts.append(self.kick)
                     if self.shelfQty > 0:
                         self.shelf = Part(self.shelfQty, "Shelf", self.depth - self.MT - 0.125, self.width - 2 * self.MT - 0.0625, "1L")
@@ -201,6 +205,11 @@ def nextPage():
                     self.bottom = Part(1, "Bottom", self.depth - self.MT, self.width - 2 * self.MT, "1L")
                     self.listParts.append(self.bottom)
 
+<<<<<<< Updated upstream
+=======
+                    # cabinetCorner = CabinetCorner(self.category, self.text, self.width, self.height, self.depth, self.shelfQty, self.secSide, self.kick, materialThickness)
+
+>>>>>>> Stashed changes
     class CabinetCorner:
         def __init__(self, category, name, width, height, depth, shelfQty, secSide, toekick, materialThickness):
             self.category = category
@@ -223,15 +232,25 @@ def nextPage():
                     self.listParts.append(self.side1)
                     self.side2 = Part(1, "Side#2", self.width - 12, self.height - self.toeKick, "-")
                     self.listParts.append(self.side2)
+<<<<<<< Updated upstream
                     self.deck = Part(2, "Deck", self.secSide - 2 * self.MT, self.width - 2 * self.MT, "1S") # "1S 90°"
+=======
+                    self.deck = Part(2, "Deck", self.secSide - 2 * self.MT, self.depth - 2 * self.MT, "1S") #1S 90°
+>>>>>>> Stashed changes
                     self.listParts.append(self.deck)
                     self.kick1 = Part(1, "Kick#1", self.toeKick - 0.25, self.secSide - self.depth + 2.5, "-")
                     self.listParts.append(self.kick1)
                     self.kick2 = Part(1, "Kick#2", self.toeKick - 0.25, self.width - self.depth + 2.5 + self.MT, "-")
                     self.listParts.append(self.kick2)
+<<<<<<< Updated upstream
                     self.shelf = Part(1, "Shelf", self.secSide - 2 * self.MT - 0.0625, self.width - 2 * self.MT - 0.0625, "1S") # "1S 90°"
                     self.listParts.append(self.shelf)
                     self.back = Part(1, "Back", "18", self.height, "-") #Back width is 18 in standard
+=======
+                    self.shelf = Part(1, "Shelf", self.secSide - 2 * self.MT - 0.0625, self.width - 2 * self.MT - 0.0625, "1S") #1S 90°
+                    self.listParts.append(self.shelf)
+                    self.back = Part(1, "Back", "Unsure 18", self.height, "-")
+>>>>>>> Stashed changes
                     self.listParts.append(self.back)
 
 
@@ -268,7 +287,10 @@ def nextPage():
                     self.back2 = Part(1, "Back#2", self.width - self.MT, self.height, "2S")
                     self.listParts.append(self.back2)
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     class Cabinet:
         def __init__(self, category, name, width, height, depth, shelfQty, secSide, toekick, materialThickness):
             self.category = category
@@ -285,7 +307,10 @@ def nextPage():
             self.listParts = []
 
             #FORMULAS:
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
                 # if self.name == "Microwave Slot":
                 #     # --UNSURE-- Will implement later.
                 #     self.gable = Part(2, "Gable", self.depth - self.MT, self.height, "1L + 2S")
@@ -459,8 +484,13 @@ def nextPage():
     workspace_frame = Frame(workspace_canvas)
     workspace_canvas.create_window((0,0), window=workspace_frame, anchor="nw")
 
+<<<<<<< Updated upstream
     for newthing in range(40):
         Label(workspace_frame, text=".").grid(row = newthing+30, column = 0, pady=10, padx=10)
+=======
+    for newthing in range(80):
+        Label(workspace_frame, text=".", fg='#fff').grid(row = newthing+30, column = 0, pady=10, padx=10)
+>>>>>>> Stashed changes
 
     #Cutlist Scrollbar
     cutlist_backFrame = LabelFrame(app_frame, text="Cutlist", padx=5, pady=5)
@@ -474,8 +504,13 @@ def nextPage():
     cutlist_frame = Frame(cutlist_canvas)
     cutlist_canvas.create_window((0,0), window=cutlist_frame, anchor="nw")
 
+<<<<<<< Updated upstream
     for newthing in range(40):
         Label(cutlist_frame, text=".").grid(row = newthing+30, column = 0, pady=10, padx=10)
+=======
+    for newthing in range(80):
+        Label(cutlist_frame, text=".", fg='#fff').grid(row = newthing+30, column = 0, pady=10, padx=10)
+>>>>>>> Stashed changes
 
     baseBinary = LabelFrame(workspace_frame, text="Base", padx=5, pady=5)
     baseBinary.grid(row=0, column=0, padx=5, pady=5, sticky=W+E)
@@ -577,12 +612,20 @@ def nextPage():
 
             def secondSide():
                 self.secSideLabel = Label(parent, text = "Sec Side: ", padx=10, pady=5, anchor=E)
+<<<<<<< Updated upstream
                 self.secSideEntry = Entry(parent, width = 10)
                 if switch.get() == 0:
                     self.secSideLabel.grid(row=self.rowIndex, column=self.columnIndex)
                     placement()
                     self.secSideEntry.grid(row=self.rowIndex, column=self.columnIndex)
                     placement()
+=======
+                self.secSideLabel.grid(row=self.rowIndex, column=self.columnIndex)
+                placement()
+                self.secSideEntry = Entry(parent, width = 10)
+                self.secSideEntry.grid(row=self.rowIndex, column=self.columnIndex)
+                placement()
+>>>>>>> Stashed changes
 
             if self.category == "Base":
                 if switch.get() == 1:
@@ -642,6 +685,7 @@ def nextPage():
                         placement()
                 else:
                     shelf()
+<<<<<<< Updated upstream
                     if self.text == textB[2] or self.text == textB[3]:
                         secondSide()
                     toeKick()
@@ -672,6 +716,11 @@ def nextPage():
                         # self.drawerHeightEntry3.insert(0, "3.")
                         # placement()
 
+=======
+                    if switch.get() == 0 and self.text == textB[3] or switch.get() == 0 and self.text == textB[2]:
+                        secondSide()
+                    toeKick()
+>>>>>>> Stashed changes
                     # refreshPage()
 
             elif self.category == "Wall":
@@ -704,6 +753,7 @@ def nextPage():
         def send(self):
             if self.category == "Base":
                 self.text = textB[self.index]
+<<<<<<< Updated upstream
                 if self.text == textB[0]:
                     self.width = float(self.widthEntry.get())
                     self.height = float(self.heightEntry.get())
@@ -714,10 +764,23 @@ def nextPage():
                     self.width = float(self.widthEntry.get())
                     self.height = float(self.heightEntry.get())
                     self.depth = float(self.depthEntry.get())
+=======
+                def width_height_depth_get():
+                    self.width = float(self.widthEntry.get())
+                    self.height = float(self.heightEntry.get())
+                    self.depth = float(self.depthEntry.get())
+                if self.text == textB[0]:
+                    width_height_depth_get()
+                    self.shelfQty = int(self.shelfEntry.get())
+                    self.kick = float(self.kickEntry.get())
+                elif self.text == textB[1]:
+                    width_height_depth_get()
+>>>>>>> Stashed changes
                     self.drawerQty = int(self.drawerNumEntry.get())
                     self.kick = float(self.kickEntry.get())
                     self.drawerDepth = float(self.drawerDepthEntry.get())
                 elif self.text == textB[2] or self.text == text[3]:
+<<<<<<< Updated upstream
                     self.width = float(self.widthEntry.get())
                     self.height = float(self.heightEntry.get())
                     self.depth = float(self.depthEntry.get())
@@ -725,18 +788,30 @@ def nextPage():
                     if switch.get() == 1:
                         self.secSide = float(self.depthEntry.get())
                     else:
+=======
+                    width_height_depth_get()
+                    self.shelfQty = int(self.shelfEntry.get())
+                    if switch.get() == 1:
+                        self.secSide = float(self.widthEntry.get())
+                    elif switch.get() == 0:
+>>>>>>> Stashed changes
                         self.secSide = float(self.secSideEntry.get())
                     self.kick = float(self.kickEntry.get())
             elif self.category == "Wall":
                 self.text = textW[self.index]
+<<<<<<< Updated upstream
                 self.width = float(self.widthEntry.get())
                 self.height = float(self.heightEntry.get())
                 self.depth = float(self.depthEntry.get())
+=======
+                width_height_depth_get()
+>>>>>>> Stashed changes
                 self.shelfQty = int(self.shelfEntry.get())
                 self.kick = float(self.kickEntry.get())
                 if self.text == textW[1]:
                     self.secSide = int(self.secSideEntry.get())
             elif self.category == "Tall":
+<<<<<<< Updated upstream
                 self.width = float(self.widthEntry.get())
                 self.height = float(self.heightEntry.get())
                 self.depth = float(self.depthEntry.get())
@@ -746,6 +821,13 @@ def nextPage():
                 self.width = float(self.widthEntry.get())
                 self.height = float(self.heightEntry.get())
                 self.depth = float(self.depthEntry.get())
+=======
+                width_height_depth_get()
+                self.shelfQty = int(self.shelfEntry.get())
+                self.kick = float(self.kickEntry.get())
+            elif self.category == "Vanity":
+                width_height_depth_get()
+>>>>>>> Stashed changes
                 self.shelfQty = int(self.shelfEntry.get())
                 self.kick = float(self.kickEntry.get())
 
@@ -794,18 +876,25 @@ def nextPage():
                 showOutputs = Send(customCutlist, listC)
 
     def show():
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         i = 0
         for item in itemsB:
             if item.get() == 1:
                 numB = amountB[i].get()
                 for count in range(numB):
                     r = rowNumInShow.get()
+<<<<<<< Updated upstream
                     if switch.get() == 1:
                         frameLabelB = textB[i] + "(Standard)"
                     elif switch.get() == 0:
                         frameLabelB = textB[i] + "(Custom)"
                     itemFrameB = LabelFrame(baseBinary, text=frameLabelB, padx=5, pady=5)
+=======
+                    itemFrameB = LabelFrame(baseBinary, text=textB[i], padx=5, pady=5)
+>>>>>>> Stashed changes
                     itemFrameB.pack(anchor=W)
                     receiveInputsB = Show(itemFrameB, i, "Base")
                 amountB[i].set(0)
@@ -818,11 +907,15 @@ def nextPage():
                 numW = amountW[i].get()
                 for count in range(numW):
                     r = rowNumInShow.get()
+<<<<<<< Updated upstream
                     if switch.get() == 1:
                         frameLabelW = textW[i] + "(Standard)"
                     elif switch.get() == 0:
                         frameLabelW = textW[i] + "(Custom)"
                     itemFrameW = LabelFrame(wallBinary, text=frameLabelW, padx=5, pady=5)
+=======
+                    itemFrameW = LabelFrame(wallBinary, text=textW[i], padx=5, pady=5)
+>>>>>>> Stashed changes
                     itemFrameW.pack(anchor=W)
                     receiveInputsW = Show(itemFrameW, i, "Wall")
                 amountW[i].set(0)
@@ -835,11 +928,15 @@ def nextPage():
                 numT = amountT[i].get()
                 for count in range(numT):
                     r = rowNumInShow.get()
+<<<<<<< Updated upstream
                     if switch.get() == 1:
                         frameLabelT = textT[i] + "(Standard)"
                     elif switch.get() == 0:
                         frameLabelT = textT[i] + "(Custom)"
                     itemFrameT = LabelFrame(tallBinary, text=frameLabelT, padx=5, pady=5)
+=======
+                    itemFrameT = LabelFrame(tallBinary, text=textT[i], padx=5, pady=5)
+>>>>>>> Stashed changes
                     itemFrameT.pack(anchor=W)
                     receiveInputsT = Show(itemFrameT, i, "Tall")
                 amountT[i].set(0)
@@ -847,17 +944,24 @@ def nextPage():
         #update frame base for correct quantity(0)
 
         i = 0
+<<<<<<< Updated upstream
         r = rowNumInShow.get()
+=======
+>>>>>>> Stashed changes
         for item in itemsV:
             if item.get() == 1:
                 numV = amountV[i].get()
                 for count in range(numV):
                     r = rowNumInShow.get()
+<<<<<<< Updated upstream
                     if switch.get() == 1:
                         frameLabelV = textV[i] + "(Standard)"
                     elif switch.get() == 0:
                         frameLabelV = textV[i] + "(Custom)"
                     itemFrameV = LabelFrame(vanityBinary, text=frameLabelV, padx=5, pady=5)
+=======
+                    itemFrameV = LabelFrame(vanityBinary, text=textV[i], padx=5, pady=5)
+>>>>>>> Stashed changes
                     itemFrameV.pack(anchor=W)
                     receiveInputsV = Show(itemFrameV, i, "Vanity")
                 amountV[i].set(0)
@@ -872,7 +976,10 @@ def nextPage():
         amountC = numCustom.get()
         for count in range(amountC):
             itemLabelC = Label(customBinary, text = "Custom" + str(i + 1), font = ('Helvetica', 10, 'bold'), padx=7, pady=5).grid(row=j, column=0, sticky=W+E)
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
             receiveInputsC = Show(customBinary, i, "Custom")
 
             j += 2
