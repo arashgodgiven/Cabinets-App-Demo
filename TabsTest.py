@@ -10,12 +10,12 @@ root.configure(background='black')
 root.geometry("700x500")
 
 font1 = Font(
-        family="Arial Rounded MT",
-        size=13,
+        family="Helvetica",
+        size=8,
         overstrike=0)
 font2 = Font(
-        family="Alien League",
-        size=12,
+        family="Arial Rounded MT",
+        size=13,
         overstrike=0)
 font3 = Font(
         family="Arial Rounded MT Bold",
@@ -62,95 +62,32 @@ def nextPage():
     status.grid(row=0, rowspan=2, column=2, columnspan=6, ipadx=450, sticky=W+E)
 
     #Cabinets defined
-    class Cabinet:
-        def __init__(self, category, name, width, height, depth, shelfQty, secSide, toekick, materialThickness):
+    class CabinetFullDoor:
+        def __init__(self, category, name, width, height, depth, shelfQty, toeKick, materialThickness):
             self.category = category
             self.name = name
             self.width = width
             self.height = height
             self.depth = depth
             self.shelfQty = shelfQty
-            self.secSide = secSide
             self.toeKick = toekick #4.5
             self.MT = materialThickness #0.625
-            self.railspace = railSpaceList[railNum.get()]
 
             self.listParts = []
 
-            #FORMULAS:
             if self.category == "Base":
                 if self.name == "Full Door":
                     self.gable = Part(2, "Gable", self.depth - self.MT, self.height, "1L")
                     self.listParts.append(self.gable)
-                    self.bottom = Part(1, "Bottom", self.depth - self.MT, self.width - 2 * self.MT, "1L")
+                    self.bottom = Part(1, "Bottom", self.depth - self.MT, self.width - 2 * self.MT, "1S")
                     self.listParts.append(self.bottom)
-                    self.kick = Part(1, "Kick", self.toeKick - 0.25, self.width - 2 * self.MT, "1L")  #TOEKICK -0.25
+                    self.kick = Part(1, "Kick", self.toeKick - 0.25, self.width - 2 * self.MT, "-")
                     self.listParts.append(self.kick)
                     if self.shelfQty > 0:
                         self.shelf = Part(self.shelfQty, "Shelf", self.depth - self.MT - 0.125, self.width - 2 * self.MT - 0.0625, "1L")
                         self.listParts.append(self.shelf)
                     self.back = Part(1, "Back", self.width, self.height - self.toeKick, "-")
                     self.listParts.append(self.back)
-
-                if name == "Drawers":
-                    self.gable = Part(2, "Gable", self.depth - self.MT, self.height, "1L")
-                    self.listParts.append(self.gable)
-                    self.back = Part(1, "Back", self.width, self.height - self.toeKick, "-")
-                    self.listParts.append(self.back)
-                    self.kick = Part(1, "Kick", self.toeKick - 0.25, self.width - 2 * self.MT, "1L")
-                    self.listParts.append(self.kick)
-
-                    self.sides1 = Part(2, "Sides1", "--length by user--", "--width by user--", "1L")     #EDIT
-                    self.listParts.append(self.sides1)
-                    self.frontBack1 = Part(2, "Front & Back1", self.width - 2 * self.MT - 2 * self.railspace, "--width by user--", "1L")   #EDIT
-                    self.listParts.append(self.frontBack1)
-                    self.sides2 = Part(4, "Sides2", "--length by user--", "--width by user--", "1L")
-                    self.listParts.append(self.sides2)
-                    self.frontBack2 = Part(4, "Front & Back2", self.width - 2 * self.MT - 2 * self.railspace, "--width by user--", "1L")
-                    self.listParts.append(self.frontBack2)
-                    self.drawerBottom = Part(3, "Drawer Bottom", "--length by user--", self.width - 2 * self.MT - 2 * self.railspace, "-")
-                    self.listParts.append(self.drawerBottom)
-                    self.topStretcher = Part(2, "Top Stretcher", 4, self.width - 2 * self.MT, "-")
-                    self.listParts.append(self.topStretcher)
-                    self.bottom = Part(1, "Bottom", self.depth - self.MT, self.width - 2 * self.MT, "1L")
-                    self.listParts.append(self.bottom)
-
-                if name == "Corner 90":
-                    self.gable = Part(2, "Gable", self.depth - self.MT, self.height, "1L")
-                    self.listParts.append(self.gable)
-                    self.deck = Part(2, "Deck", self.secSide - 2 * self.MT, self.depth - 2 * self.MT, "1S 90°")
-                    self.listParts.append(self.deck)
-                    self.kick1 = Part(1, "Kick#1", self.toeKick - 0.25, self.secSide - self.depth + 2.5, "-")
-                    self.listParts.append(self.kick1)
-                    self.kick2 = Part(1, "Kick#2", self.toeKick - 0.25, self.width - self.depth + 2.5 + self.MT, "-")
-                    self.listParts.append(self.kick2)
-                    self.shelf = Part(1, "Shelf", self.secSide - 2 * self.MT - 0.0625, self.width - 2 * self.MT - 0.0625, "1S 90°")
-                    self.listParts.append(self.shelf)
-                    self.back = Part(1, "Back", "Unsure 18", self.height, "-")
-                    self.listParts.append(self.back)
-                    self.side1 = Part(1, "Side#1", self.secSide - 12, self.height - self.toeKick, "-")
-                    self.listParts.append(self.side1)
-                    self.side2 = Part(1, "Side#2", self.width - 12, self.height - self.toeKick, "-")
-                    self.listParts.append(self.side2)
-
-                if name == "Corner Diagonal":
-                    # --UNSURE-- Everything is same as Corner 90.
-                    self.gable = Part(2, "Gable", self.depth - self.MT, self.height, "1L")
-                    self.listParts.append(self.gable)
-                    self.deck = Part(2, "Deck", self.secSide - 2 * self.MT, self.depth - 2 * self.MT, "1S 90°")
-                    self.listParts.append(self.deck)
-                    self.kick1 = Part(1, "Kick#1", self.toeKick - 0.25, self.secSide - self.depth + 2.5, "-")
-                    self.listParts.append(self.kick1)
-                    self.kick2 = Part(1, "Kick#2", self.toeKick - 0.25, self.width - self.depth + 2.5 + self.MT, "-")
-                    self.listParts.append(self.kick2)
-                    self.shelf = Part(1, "Shelf", self.secSide - 2 * self.MT - 0.0625, self.width - 2 * self.MT - 0.0625, "1S 90°")
-                    self.listParts.append(self.shelf)
-                    self.back = Part(1, "Back", "Unsure 18", self.height, "-")
-                    self.listParts.append(self.back)
-                    self.side1 = Part(1, "Side#1", self.secSide - 12, self.height - self.toeKick, "-")
-                    self.listParts.append(self.side1)
-                    self.side2 = Part(1, "Side#2", self.width - 12, self.height - self.toeKick, "-")
-                    self.listParts.append(self.side2)
 
             if self.category == "Wall":
                 if self.name == "Full Door":
@@ -163,24 +100,6 @@ def nextPage():
                         self.listParts.append(self.shelf)
                     self.back = Part(1, "Back", self.width, self.height, "2S")
                     self.listParts.append(self.back)
-
-                if self.name == "Corner 90": #No kick for Corner 90?
-                    self.gable = Part(2, "Gable", self.depth - self.MT, self.height, "1L + 2S")
-                    self.listParts.append(self.gable)
-                    self.deck = Part(3, "Deck", self.width - 2 * self.MT, self.width - 2 * self.MT, "1A")
-                    self.listParts.append(self.deck)
-                    if self.shelfQty > 0:
-                        self.shelf = Part(self.shelfQty, "Shelf", self.width - 2 * self.MT - 0.0625, self.width - 2 * self.MT - 0.0625, "1A")
-                        self.listParts.append(self.shelf)
-                    self.back1 = Part(1, "Back#1", self.width, self.height, "2S")
-                    self.listParts.append(self.back1)
-                    self.back2 = Part(1, "Back#2", self.width - self.MT, self.height, "2S")
-                    self.listParts.append(self.back2)
-
-                if self.name == "Microwave Slot":
-                    # --UNSURE-- Will implement later.
-                    self.gable = Part(2, "Gable", self.depth - self.MT, self.height, "1L + 2S")
-                    self.listParts.append(self.gable)
 
             if self.category == "Tall":
                 if self.name == "Full Door":
@@ -209,6 +128,172 @@ def nextPage():
                         self.listParts.append(self.shelf)
                     self.back = Part(1, "Back", self.width, self.height - self.toeKick, "-")
                     self.listParts.append(self.back)
+
+    class CabinetDrawers:
+        def __init__(self, category, name, width, height, depth, drawerQty, drawerHeights, drawerDepth, toekick, materialThickness):
+            self.category = category
+            self.name = name
+            self.width = width
+            self.height = height
+            self.depth = depth
+            self.drawerQty = drawerQty
+            self.drawerHeights = []
+            self.drawerHeights = drawerHeights
+            self.drawerDepth = drawerDepth
+            self.toeKick = toekick #4.5
+            self.MT = materialThickness #0.625
+            self.railType = railList[railNum.get()]
+            self.railSpaceSides = railSpaceSidesList[railNum.get()]
+            self.railSpaceUnder = railSpaceUnderList[railNum.get()]
+
+            self.listParts = []
+
+            if self.category == "Base":
+                if name == "Drawers":
+                    self.gable = Part(2, "Gable", self.depth - self.MT, self.height, "1L")
+                    self.listParts.append(self.gable)
+                    self.back = Part(1, "Back", self.width, self.height - self.toeKick, "-")
+                    self.listParts.append(self.back)
+                    self.kick = Part(1, "Kick", self.toeKick - 0.25, self.width - 2 * self.MT, "-")
+                    self.listParts.append(self.kick)
+                    self.sides1 = Part(2, "Sides1", self.drawerHeights[0], self.drawerDepth, "1L")
+                    self.listParts.append(self.sides1)
+                    self.frontBack1 = Part(2, "Front & Back1", self.drawerHeights[0] - self.railSpaceUnder, self.width - 2 * self.MT - 2 * self.railSpaceSides, "1L")
+                    self.listParts.append(self.frontBack1)
+                    self.sides2 = Part(4, "Sides2", self.drawerHeights[1], self.drawerDepth, "1L")
+                    self.listParts.append(self.sides2)
+                    self.frontBack2 = Part(4, "Front & Back2", self.drawerHeights[1] - self.railSpaceUnder, self.width - 2 * self.MT - 2 * self.railSpaceSides, "1L")
+                    self.listParts.append(self.frontBack2)
+                    if self.railType == "P-2-O UM" or self.railType == "Under Mount":
+                        self.drawerBottom = Part(3, "Drawer Bottom", self.width - 2 * self.MT - 2 * self.railSpaceSides, self.drawerDepth, "-")
+                        self.listParts.append(self.drawerBottom)
+                    else:
+                        self.drawerBottom = Part(3, "Drawer Bottom", self.width - 2 * self.railSpaceSides, self.drawerDepth, "-")
+                        self.listParts.append(self.drawerBottom)
+                    self.topStretcherFront = Part(1, "Top Stretcher", 4, self.width - 2 * self.MT, "1L")
+                    self.listParts.append(self.topStretcherFront)
+                    self.topStretcherBack = Part(1, "Top Stretcher", 4, self.width - 2 * self.MT, "-")
+                    self.listParts.append(self.topStretcherBack)
+                    self.bottom = Part(1, "Bottom", self.width - 2 * self.MT, self.depth - self.MT, "1S")
+                    self.listParts.append(self.bottom)
+
+            if self.category == "Vanity":
+                if name == "Drawers":
+                    self.gable = Part(2, "Gable", self.depth - self.MT, self.height, "1L")
+                    self.listParts.append(self.gable)
+                    self.back = Part(1, "Back", self.width, self.height - self.toeKick, "-")
+                    self.listParts.append(self.back)
+                    self.kick = Part(1, "Kick", self.toeKick - 0.25, self.width - 2 * self.MT, "1L")
+                    self.listParts.append(self.kick)
+
+                    self.sides1 = Part(2, "Sides1", "--length by user--", "--width by user--", "1L")     #EDIT
+                    self.listParts.append(self.sides1)
+                    self.frontBack1 = Part(2, "Front & Back1", self.width - 2 * self.MT - 2 * self.railspace, "--width by user--", "1L")   #EDIT
+                    self.listParts.append(self.frontBack1)
+                    self.sides2 = Part(4, "Sides2", "--length by user--", "--width by user--", "1L")
+                    self.listParts.append(self.sides2)
+                    self.frontBack2 = Part(4, "Front & Back2", self.width - 2 * self.MT - 2 * self.railspace, "--width by user--", "1L")
+                    self.listParts.append(self.frontBack2)
+                    self.drawerBottom = Part(3, "Drawer Bottom", "--length by user--", self.width - 2 * self.MT - 2 * self.railspace, "-")
+                    self.listParts.append(self.drawerBottom)
+                    self.topStretcher = Part(2, "Top Stretcher", 4, self.width - 2 * self.MT, "-")
+                    self.listParts.append(self.topStretcher)
+                    self.bottom = Part(1, "Bottom", self.depth - self.MT, self.width - 2 * self.MT, "1L")
+                    self.listParts.append(self.bottom)
+
+    class CabinetCorner:
+        def __init__(self, category, name, width, height, depth, shelfQty, secSide, toekick, materialThickness):
+            self.category = category
+            self.name = name
+            self.width = width
+            self.height = height
+            self.depth = depth
+            self.shelfQty = shelfQty
+            self.secSide = secSide
+            self.toeKick = toekick #4.5
+            self.MT = materialThickness #0.625
+
+            self.listParts = []
+
+            if self.category == "Base":
+                if name == "Corner 90":
+                    self.gable = Part(2, "Gable", self.depth - self.MT, self.height, "1L")
+                    self.listParts.append(self.gable)
+                    self.side1 = Part(1, "Side#1", self.secSide - 12, self.height - self.toeKick, "-")
+                    self.listParts.append(self.side1)
+                    self.side2 = Part(1, "Side#2", self.width - 12, self.height - self.toeKick, "-")
+                    self.listParts.append(self.side2)
+                    self.deck = Part(2, "Deck", self.secSide - 2 * self.MT, self.width - 2 * self.MT, "1S") # "1S 90°"
+                    self.listParts.append(self.deck)
+                    self.kick1 = Part(1, "Kick#1", self.toeKick - 0.25, self.secSide - self.depth + 2.5, "-")
+                    self.listParts.append(self.kick1)
+                    self.kick2 = Part(1, "Kick#2", self.toeKick - 0.25, self.width - self.depth + 2.5 + self.MT, "-")
+                    self.listParts.append(self.kick2)
+                    self.shelf = Part(1, "Shelf", self.secSide - 2 * self.MT - 0.0625, self.width - 2 * self.MT - 0.0625, "1S") # "1S 90°"
+                    self.listParts.append(self.shelf)
+                    self.back = Part(1, "Back", "18", self.height, "-") #Back width is 18 in standard
+                    self.listParts.append(self.back)
+
+
+                if name == "Corner Diagonal":
+                    # --UNSURE-- Everything is same as Corner 90.
+                    self.gable = Part(2, "Gable", self.depth - self.MT, self.height, "1L")
+                    self.listParts.append(self.gable)
+                    self.deck = Part(2, "Deck", self.secSide - 2 * self.MT, self.depth - 2 * self.MT, "1S 90°")
+                    self.listParts.append(self.deck)
+                    self.kick1 = Part(1, "Kick#1", self.toeKick - 0.25, self.secSide - self.depth + 2.5, "-")
+                    self.listParts.append(self.kick1)
+                    self.kick2 = Part(1, "Kick#2", self.toeKick - 0.25, self.width - self.depth + 2.5 + self.MT, "-")
+                    self.listParts.append(self.kick2)
+                    self.shelf = Part(1, "Shelf", self.secSide - 2 * self.MT - 0.0625, self.width - 2 * self.MT - 0.0625, "1S 90°")
+                    self.listParts.append(self.shelf)
+                    self.back = Part(1, "Back", "Unsure 18", self.height, "-")
+                    self.listParts.append(self.back)
+                    self.side1 = Part(1, "Side#1", self.secSide - 12, self.height - self.toeKick, "-")
+                    self.listParts.append(self.side1)
+                    self.side2 = Part(1, "Side#2", self.width - 12, self.height - self.toeKick, "-")
+                    self.listParts.append(self.side2)
+
+            if self.category == "Wall":
+                if self.name == "Corner 90": #No kick for Corner 90?
+                    self.gable = Part(2, "Gable", self.depth - self.MT, self.height, "1L + 2S")
+                    self.listParts.append(self.gable)
+                    self.deck = Part(3, "Deck", self.width - 2 * self.MT, self.width - 2 * self.MT, "1A")
+                    self.listParts.append(self.deck)
+                    if self.shelfQty > 0:
+                        self.shelf = Part(self.shelfQty, "Shelf", self.width - 2 * self.MT - 0.0625, self.width - 2 * self.MT - 0.0625, "1A")
+                        self.listParts.append(self.shelf)
+                    self.back1 = Part(1, "Back#1", self.width, self.height, "2S")
+                    self.listParts.append(self.back1)
+                    self.back2 = Part(1, "Back#2", self.width - self.MT, self.height, "2S")
+                    self.listParts.append(self.back2)
+
+
+    class Cabinet:
+        def __init__(self, category, name, width, height, depth, shelfQty, secSide, toekick, materialThickness):
+            self.category = category
+            self.name = name
+            self.width = width
+            self.height = height
+            self.depth = depth
+            self.shelfQty = shelfQty
+            self.secSide = secSide
+            self.toeKick = toekick #4.5
+            self.MT = materialThickness #0.625
+            self.railspace = railSpaceSidesList[railNum.get()]
+
+            self.listParts = []
+
+            #FORMULAS:
+
+                # if self.name == "Microwave Slot":
+                #     # --UNSURE-- Will implement later.
+                #     self.gable = Part(2, "Gable", self.depth - self.MT, self.height, "1L + 2S")
+                #     self.listParts.append(self.gable)
+
+            # if self.category == "Tall":
+
+            # if self.category == "Vanity":
 
             # if self.category == "Custom":
                 # --UNSURE-- Implement Custom Formulas here.
@@ -364,7 +449,7 @@ def nextPage():
 
     #Workspace Scrollbar
     workspace_backFrame = LabelFrame(app_frame, text="Workspace", padx=0, pady=5)
-    workspace_backFrame.grid(row=1, rowspan = 5, column=1, columnspan=21, padx=0, pady=5, sticky=W+E+N+S)
+    workspace_backFrame.grid(row=1, rowspan = 5, column=1, columnspan=18, padx=0, pady=5, sticky=W+E+N+S)
     workspace_canvas = Canvas(workspace_backFrame)
     workspace_canvas.pack(side=LEFT, fill=BOTH, expand=1)
     workspace_scrollbar = ttk.Scrollbar(workspace_backFrame, orient=VERTICAL, command=workspace_canvas.yview)
@@ -379,7 +464,7 @@ def nextPage():
 
     #Cutlist Scrollbar
     cutlist_backFrame = LabelFrame(app_frame, text="Cutlist", padx=5, pady=5)
-    cutlist_backFrame.grid(row=1, rowspan = 5, column=22, columnspan=5, padx=5, pady=5, sticky=W+E+N+S)
+    cutlist_backFrame.grid(row=1, rowspan = 5, column=19, columnspan=6, padx=5, pady=5, sticky=W+E+N+S)
     cutlist_canvas = Canvas(cutlist_backFrame)
     cutlist_canvas.pack(side=LEFT, fill=BOTH, expand=1)
     cutlist_scrollbar = ttk.Scrollbar(cutlist_backFrame, orient=VERTICAL, command=cutlist_canvas.yview)
@@ -406,7 +491,7 @@ def nextPage():
 
     class Send:
         def __init__(self, parent, givenList):
-            self.spec = ["Quantity", "Name", "Length", "Width", "Tape"]
+            self.spec = ["Quantity", "Name", "Width", "Length", "Tape"]
             self.i = 0
             for self.obj in givenList:
                 self.j = 1
@@ -427,17 +512,21 @@ def nextPage():
         def __init__(self, parent, givenIndex, givenString):
             self.index = givenIndex
             self.category = givenString
-            self.columnIndex = 1
-            self.rowIndex = rowNumInShow.get()
+            self.columnIndex = 0
+            self.rowIndex = 0
             self.drawerQty = 0
+            self.drawerHeights = []
 
             def placement():
                 self.columnIndex += 1
                 if self.columnIndex > 6:
-                    self.rowIndex = rowNumInShow.get()
-                    self.columnIndex = 1
+                    self.columnIndex = 0
                     self.rowIndex += 1
                     rowNumInShow.set(self.rowIndex + 1)
+
+            self.MTLabel1 = Label(parent, text = "M.T. : " + str(materialThickness), padx = 10, pady = 5, anchor = E)
+            self.MTLabel1.grid(row=self.rowIndex, column=self.columnIndex)
+            placement()
 
             def width_height_depth(givenHeight, givenDepth):
                 self.widthLabel = Label(parent, text="Width: ", padx=10, pady=5)
@@ -463,12 +552,17 @@ def nextPage():
                 placement()
                 self.depthEntry.insert(0, givenDepth)
 
+                self.sendButton = Button(parent, text=">", command=self.send)
+                self.sendButton.grid(row=self.rowIndex-1, column=7, padx=10, pady=5)
+
             def shelf():
                 self.shelfLabel = Label(parent, text = "Shelves #: ", padx=10, pady=5, anchor=E)
                 self.shelfLabel.grid(row=self.rowIndex, column=self.columnIndex)
                 placement()
                 self.shelfEntry = Entry(parent, width = 10)
                 self.shelfEntry.grid(row=self.rowIndex, column=self.columnIndex)
+                if switch.get() == 1:
+                    self.shelfEntry.insert(0, 1)
                 placement()
 
             def toeKick():
@@ -477,18 +571,18 @@ def nextPage():
                 placement()
                 self.kickEntry = Entry(parent, width = 10)
                 self.kickEntry.grid(row=self.rowIndex, column=self.columnIndex)
+                if switch.get() == 1:
+                    self.kickEntry.insert(0, 4.5)
                 placement()
 
             def secondSide():
                 self.secSideLabel = Label(parent, text = "Sec Side: ", padx=10, pady=5, anchor=E)
-                self.secSideLabel.grid(row=self.rowIndex, column=self.columnIndex)
-                placement()
                 self.secSideEntry = Entry(parent, width = 10)
-                self.secSideEntry.grid(row=self.rowIndex, column=self.columnIndex)
-                placement()
-
-            self.MTLabel1 = Label(parent, text = "M.T. : " + str(materialThickness), padx = 10, pady = 5, anchor = E)
-            self.MTLabel1.grid(row=self.rowIndex + 1, column=0)
+                if switch.get() == 0:
+                    self.secSideLabel.grid(row=self.rowIndex, column=self.columnIndex)
+                    placement()
+                    self.secSideEntry.grid(row=self.rowIndex, column=self.columnIndex)
+                    placement()
 
             if self.category == "Base":
                 if switch.get() == 1:
@@ -497,43 +591,88 @@ def nextPage():
                     width_height_depth(0, 0)
 
                 self.text = textB[self.index]
-                if self.text == textB[0]:
-                    shelf()
+                if self.text == textB[1]:
+                    self.railSpaceLabel = Label(parent, text = "Railing:\n" + railList[railNum.get()] + " , " + str(railSpaceSidesList[railNum.get()]), padx = 10, pady = 5, anchor = E)
+                    self.railSpaceLabel.grid(row=self.rowIndex, column=self.columnIndex)
+                    placement()
                     toeKick()
-
-                elif self.text == textB[1]:
                     self.drawerNumLabel = Label(parent, text = "Drawer #: ", padx=10, pady=5, anchor=E)
                     self.drawerNumLabel.grid(row=self.rowIndex, column=self.columnIndex)
                     placement()
                     self.drawerNumEntry = Entry(parent, width = 10)
                     self.drawerNumEntry.grid(row=self.rowIndex, column=self.columnIndex)
                     placement()
-                    if switch.get() == 1:
-                        self.drawerNumEntry.insert(0, 3)
 
                     def generateDrawerEntries():
-                        self.drawerHeightLabel = Label(parent, text = "Drawer height : ", padx=10, pady=5, anchor=E)
-                        self.drawerHeightLabel.grid(row=self.rowIndex + 1, column=1)
+                        placement()
+                        self.drawerHeightLabel = Label(parent, text = "Drawer\nheight:", padx=10, pady=5, anchor=E)
+                        self.drawerHeightLabel.grid(row=self.rowIndex, column=self.columnIndex)
                         self.drawerQty = int(self.drawerNumEntry.get())
+                        placement()
+
+                        # Correct Method:
                         for i in range(self.drawerQty):
                             self.drawerHeightEntry = Entry(parent, width = 10)
-                            self.drawerHeightEntry.grid(row=self.rowIndex + 1, column=self.columnIndex - 2, padx=3, pady=5)
-                            self.drawerHeightEntry.insert(0, str(i+1) + ".")
+                            self.drawerHeightEntry.grid(row=self.rowIndex, column=self.columnIndex, padx=3, pady=5)
+                            if i == 0:
+                                self.drawerHeightEntry.insert(0, 3.375)
+                                self.drawerHeights.append(3.375)
+                            else:
+                                self.drawerHeightEntry.insert(0, 7.375)
+                                self.drawerHeights.append(7.375)
                             placement()
 
-                    self.generateDrawerButton = Button(parent, text="˅", command=generateDrawerEntries)
-                    self.generateDrawerButton.grid(row=self.rowIndex, column=self.columnIndex, padx=3, pady=3)
-                    placement()
+                        self.drawerDepthLabel = Label(parent, text = "Drawer\nDepth:", padx=10, pady=5, anchor=E)
+                        self.drawerDepthLabel.grid(row=self.rowIndex, column=self.columnIndex, padx=3, pady=5)
+                        placement()
 
-                    self.railSpaceLabel = Label(parent, text = "Railing : " + railList[railNum.get()] + " , " + str(railSpaceList[railNum.get()]), padx = 10, pady = 5, anchor = E)
-                    self.railSpaceLabel.grid(row=self.rowIndex + 1, column=0)
-                    rowNumInShow.set(rowNumInShow.get() + 1)
-                    # refreshPage()
+                        self.drawerDepthEntry = Entry(parent, width = 10)
+                        self.drawerDepthEntry.grid(row=self.rowIndex, column=self.columnIndex, padx=3, pady=5)
+                        self.drawerDepthEntry.insert(0, 22)
+                        placement()
 
-                elif self.text == textB[2] or self.text == textB[3]:
+                    if switch.get() == 1:
+                        self.drawerNumEntry.insert(0, 3)
+                        placement()
+                        generateDrawerEntries()
+
+                    elif switch.get() == 0:
+                        self.generateDrawerButton = Button(parent, text="˅", command=generateDrawerEntries)
+                        self.generateDrawerButton.grid(row=self.rowIndex, column=self.columnIndex, padx=3, pady=3)
+                        placement()
+                else:
                     shelf()
-                    secondSide()
+                    if self.text == textB[2] or self.text == textB[3]:
+                        secondSide()
                     toeKick()
+
+                    # if switch.get() == 1:
+                    #     shelf()
+                    #     toeKick()
+                    # elif switch.get() == 0:
+                    #     if self.text == textB[0]:
+                    #         shelf()
+                    #         toeKick()
+                    #     elif self.text == textB[2] or self.text == textB[3]:
+                    #         shelf()
+                    #         secondSide()
+                    #         toeKick()
+
+                        #Temporary Method:
+                        # self.drawerHeightEntry1 = Entry(parent, width = 10)
+                        # self.drawerHeightEntry1.grid(row=self.rowIndex, column=self.columnIndex, padx=3, pady=5)
+                        # self.drawerHeightEntry1.insert(0, "1.")
+                        # placement()
+                        # self.drawerHeightEntry2 = Entry(parent, width = 10)
+                        # self.drawerHeightEntry2.grid(row=self.rowIndex, column=self.columnIndex, padx=3, pady=5)
+                        # self.drawerHeightEntry2.insert(0, "2.")
+                        # placement()
+                        # self.drawerHeightEntry3 = Entry(parent, width = 10)
+                        # self.drawerHeightEntry3.grid(row=self.rowIndex, column=self.columnIndex, padx=3, pady=5)
+                        # self.drawerHeightEntry3.insert(0, "3.")
+                        # placement()
+
+                    # refreshPage()
 
             elif self.category == "Wall":
                 if switch.get() == 1:
@@ -542,7 +681,8 @@ def nextPage():
                     width_height_depth(0, 0)
                 shelf()
                 self.text = textW[self.index]
-                if self.text == textB[1]:
+                print(self.text)
+                if self.text == textW[1]:
                     secondSide()
 
             elif self.category == "Tall":
@@ -561,18 +701,53 @@ def nextPage():
                 shelf()
                 toeKick()
 
-            self.sendButton = Button(parent, text=">", command=self.send)
-            self.sendButton.grid(row=self.rowIndex, column=7, padx=10, pady=5)
-            print(rowNumInShow.get())
-
         def send(self):
-            self.width = float(self.widthEntry.get())
-            self.height = float(self.heightEntry.get())
-            self.depth = float(self.depthEntry.get())
-            self.shelfQty = int(self.shelfEntry.get())
-            self.secSide = int(self.secSideEntry.get())
-            self.kick = float(self.kickEntry.get())
-            # self.rail =
+            if self.category == "Base":
+                self.text = textB[self.index]
+                if self.text == textB[0]:
+                    self.width = float(self.widthEntry.get())
+                    self.height = float(self.heightEntry.get())
+                    self.depth = float(self.depthEntry.get())
+                    self.shelfQty = int(self.shelfEntry.get())
+                    self.kick = float(self.kickEntry.get())
+                elif self.text == textB[1]:
+                    self.width = float(self.widthEntry.get())
+                    self.height = float(self.heightEntry.get())
+                    self.depth = float(self.depthEntry.get())
+                    self.drawerQty = int(self.drawerNumEntry.get())
+                    self.kick = float(self.kickEntry.get())
+                    self.drawerDepth = float(self.drawerDepthEntry.get())
+                elif self.text == textB[2] or self.text == text[3]:
+                    self.width = float(self.widthEntry.get())
+                    self.height = float(self.heightEntry.get())
+                    self.depth = float(self.depthEntry.get())
+                    self.shelfQty = int(self.shelfEntry.get())
+                    if switch.get() == 1:
+                        self.secSide = float(self.depthEntry.get())
+                    else:
+                        self.secSide = float(self.secSideEntry.get())
+                    self.kick = float(self.kickEntry.get())
+            elif self.category == "Wall":
+                self.text = textW[self.index]
+                self.width = float(self.widthEntry.get())
+                self.height = float(self.heightEntry.get())
+                self.depth = float(self.depthEntry.get())
+                self.shelfQty = int(self.shelfEntry.get())
+                self.kick = float(self.kickEntry.get())
+                if self.text == textW[1]:
+                    self.secSide = int(self.secSideEntry.get())
+            elif self.category == "Tall":
+                self.width = float(self.widthEntry.get())
+                self.height = float(self.heightEntry.get())
+                self.depth = float(self.depthEntry.get())
+                self.shelfQty = int(self.shelfEntry.get())
+                self.kick = float(self.kickEntry.get())
+            elif self.category == "Vanity":
+                self.width = float(self.widthEntry.get())
+                self.height = float(self.heightEntry.get())
+                self.depth = float(self.depthEntry.get())
+                self.shelfQty = int(self.shelfEntry.get())
+                self.kick = float(self.kickEntry.get())
 
             baseCutlist = LabelFrame(cutlist_frame, text="Base", padx=5, pady=5)
             baseCutlist.grid(row=0, column=0, padx=5, pady=5, sticky=W+E)
@@ -585,92 +760,90 @@ def nextPage():
             customCutlist = LabelFrame(cutlist_frame, text="Custom", padx=5, pady=5)
             customCutlist.grid(row=4, column=0, padx=5, pady=5, sticky=W+E)
 
-
             if self.category == "Base":
                 self.text = textB[self.index]
-                cabinet = Cabinet(self.category, self.text, self.width, self.height, self.depth, self.shelfQty, self.secSide, self.kick, materialThickness)
-                listB.append(cabinet)
-                for self.obj in listB:
-                    print(self.obj.name, self.obj.width, self.obj.height, self.obj.depth, sep=" ")
+                if self.text == textB[0]:
+                    cabinetFullDoor = CabinetFullDoor(self.category, self.text, self.width, self.height, self.depth, self.shelfQty, self.kick, materialThickness)
+                    listB.append(cabinetFullDoor)
+                elif self.text == textB[1]:
+                    cabinetDrawers = CabinetDrawers(self.category, self.text, self.width, self.height, self.depth, self.drawerQty, self.drawerHeights, self.drawerDepth, self.kick, materialThickness)
+                    listB.append(cabinetDrawers)
+                elif self.text == textB[2] or self.text == textB[3]:
+                    cabinetCorner = CabinetCorner(self.category, self.text, self.width, self.height, self.depth, self.shelfQty, self.secSide, self.kick, materialThickness)
+                    listB.append(cabinetCorner)
                 showOutputs = Send(baseCutlist, listB)
             if self.category == "Wall":
                 self.text = textW[self.index]
                 cabinet = Cabinet(self.category, self.text, self.width, self.height, self.depth, self.shelfQty, self.secSide, self.kick, materialThickness)
                 listW.append(cabinet)
-                for self.obj in listW:
-                    print(self.obj.name, self.obj.width, self.obj.height, self.obj.depth, sep=" ")
                 showOutputs = Send(wallCutlist, listW)
             if self.category == "Tall":
                 self.text = textT[self.index]
                 cabinet = Cabinet(self.category, self.text, self.width, self.height, self.depth, self.shelfQty, self.secSide, self.kick, materialThickness)
                 listT.append(cabinet)
-                for self.obj in listT:
-                    print(self.obj.name, self.obj.width, self.obj.height, self.obj.depth, sep=" ")
                 showOutputs = Send(tallCutlist, listT)
             if self.category == "Vanity":
                 self.text = textV[self.index]
                 cabinet = Cabinet(self.category, self.text, self.width, self.height, self.depth, self.shelfQty, self.secSide, self.kick, materialThickness)
                 listV.append(cabinet)
-                for self.obj in listV:
-                    print(self.obj.name, self.obj.width, self.obj.height, self.obj.depth, sep=" ")
                 showOutputs = Send(vanityCutlist, listV)
             if self.category == "Custom":
                 self.text = "Custom Cabinet"
                 cabinet = Cabinet(self.category, self.text, self.width, self.height, self.depth, self.shelfQty, self.secSide, self.kick, materialThickness)
                 listC.append(cabinet)
-                for self.obj in listC:
-                    print(self.obj.name, self.obj.width, self.obj.height, self.obj.depth, sep=" ")
                 showOutputs = Send(customCutlist, listC)
 
     def show():
 
         i = 0
-
         for item in itemsB:
             if item.get() == 1:
                 numB = amountB[i].get()
                 for count in range(numB):
                     r = rowNumInShow.get()
-                    itemLabelB = Label(baseBinary, text=textB[i], font = ('Helvetica', 10, 'bold'), padx=7, pady=5).grid(row=r, column=0, sticky=W+E)
-
-                    receiveInputsB = Show(baseBinary, i, "Base")
-
-                    # r = r + 2
+                    if switch.get() == 1:
+                        frameLabelB = textB[i] + "(Standard)"
+                    elif switch.get() == 0:
+                        frameLabelB = textB[i] + "(Custom)"
+                    itemFrameB = LabelFrame(baseBinary, text=frameLabelB, padx=5, pady=5)
+                    itemFrameB.pack(anchor=W)
+                    receiveInputsB = Show(itemFrameB, i, "Base")
                 amountB[i].set(0)
             i = i + 1
-        # rowNumInShow.set(r)
         #update frame base for correct quantity(0)
 
         i = 0
-        r = rowNumInShow.get()
         for item in itemsW:
             if item.get() == 1:
                 numW = amountW[i].get()
                 for count in range(numW):
-                    itemLabelW = Label(wallBinary, text=textW[i], font = ('Helvetica', 10, 'bold'), padx=7, pady=5).grid(row=r, column=0, sticky=W+E)
-
-                    receiveInputsW = Show(wallBinary, i, "Wall")
-
-                    r = r + 2
+                    r = rowNumInShow.get()
+                    if switch.get() == 1:
+                        frameLabelW = textW[i] + "(Standard)"
+                    elif switch.get() == 0:
+                        frameLabelW = textW[i] + "(Custom)"
+                    itemFrameW = LabelFrame(wallBinary, text=frameLabelW, padx=5, pady=5)
+                    itemFrameW.pack(anchor=W)
+                    receiveInputsW = Show(itemFrameW, i, "Wall")
                 amountW[i].set(0)
             i = i + 1
-        # rowNumInShow.set(r)
         #update frame base for correct quantity(0)
 
         i = 0
-        r = rowNumInShow.get()
         for item in itemsT:
             if item.get() == 1:
                 numT = amountT[i].get()
                 for count in range(numT):
-                    itemLabelT = Label(tallBinary, text=textT[i], font = ('Helvetica', 10, 'bold'), padx=7, pady=5).grid(row=r, column=0, sticky=W+E)
-
-                    receiveInputsT = Show(tallBinary, i, "Tall")
-
-                    r = r + 2
+                    r = rowNumInShow.get()
+                    if switch.get() == 1:
+                        frameLabelT = textT[i] + "(Standard)"
+                    elif switch.get() == 0:
+                        frameLabelT = textT[i] + "(Custom)"
+                    itemFrameT = LabelFrame(tallBinary, text=frameLabelT, padx=5, pady=5)
+                    itemFrameT.pack(anchor=W)
+                    receiveInputsT = Show(itemFrameT, i, "Tall")
                 amountT[i].set(0)
             i = i + 1
-        # rowNumInShow.set(r)
         #update frame base for correct quantity(0)
 
         i = 0
@@ -679,14 +852,16 @@ def nextPage():
             if item.get() == 1:
                 numV = amountV[i].get()
                 for count in range(numV):
-                    itemLabelV = Label(vanityBinary, text=textV[i], font = ('Helvetica', 10, 'bold'), padx=7, pady=5).grid(row=r, column=0, sticky=W+E)
-
-                    receiveInputsV = Show(vanityBinary, i, "Vanity")
-
-                    r = r + 2
+                    r = rowNumInShow.get()
+                    if switch.get() == 1:
+                        frameLabelV = textV[i] + "(Standard)"
+                    elif switch.get() == 0:
+                        frameLabelV = textV[i] + "(Custom)"
+                    itemFrameV = LabelFrame(vanityBinary, text=frameLabelV, padx=5, pady=5)
+                    itemFrameV.pack(anchor=W)
+                    receiveInputsV = Show(itemFrameV, i, "Vanity")
                 amountV[i].set(0)
             i = i + 1
-        # rowNumInShow.set(r)
         #update frame base for correct quantity(0)
 
         customBinary = LabelFrame(workspace_frame, text="Custom", padx=5, pady=5)
@@ -882,7 +1057,8 @@ status.pack(fill=BOTH)
 
 #For Rails
 railList = ["Regular", "Side Mount", "P-2-O SM", "P-2-O UM", "Under Mount"]
-railSpaceList = [2.25, 2.25, 2.25, 1.75, 1.5625]
+railSpaceSidesList = [2.25, 2.25, 2.25, 1.75, 1.5625]
+railSpaceUnderList = [0, 0, 0, 1.125, 1.125]
 railNum = IntVar()
 railNum.set(0)
 railFrame = Frame(main_frame, pady=40)
@@ -895,7 +1071,7 @@ def railChangeUp():
     railType = Label(railFrame, text = "---------------------", fg='#fff', font=font3).grid(row=1, rowspan=2, column=1, padx = 10, sticky=W)
     railType = Label(railFrame, text = railList[railNum.get()], font=font3).grid(row=1, rowspan=2, column=1, padx = 10, sticky=W)
     railSpaceLabel = Label(railFrame, text="---------------------", fg='#fff').grid(row=3, column=1, padx=10, sticky=W)
-    railSpaceLabel = Label(railFrame, text="Rail Space : " + str(railSpaceList[railNum.get()])).grid(row=3, column=1, padx=10, sticky=W)
+    railSpaceLabel = Label(railFrame, text="Rail Space : " + str(railSpaceSidesList[railNum.get()])).grid(row=3, column=1, padx=10, sticky=W)
 def railChangeDown():
     railNum.set(railNum.get() - 1)
     if railNum.get() < 0:
@@ -903,7 +1079,7 @@ def railChangeDown():
     railType = Label(railFrame, text = "---------------------", fg='#fff', font=font3).grid(row=1, rowspan=2, column=1, padx = 10, sticky=W)
     railType = Label(railFrame, text = railList[railNum.get()], font=font3).grid(row=1, rowspan=2, column=1, padx = 10, sticky=W)
     railSpaceLabel = Label(railFrame, text="---------------------", fg='#fff').grid(row=3, column=1, padx=10, sticky=W)
-    railSpaceLabel = Label(railFrame, text="Rail Space : " + str(railSpaceList[railNum.get()])).grid(row=3, column=1, padx=10, sticky=W)
+    railSpaceLabel = Label(railFrame, text="Rail Space : " + str(railSpaceSidesList[railNum.get()])).grid(row=3, column=1, padx=10, sticky=W)
 
 railQLabel = Label(railFrame, text="What kind of railing for drawers?", font=font3)
 railQLabel.grid(row=0, column=0, columnspan=3, padx=10, pady=10, sticky=W+E)
@@ -912,7 +1088,7 @@ railType = Label(railFrame, text = "---------------------", fg='#fff', font=font
 railType = Label(railFrame, text = railList[railNum.get()], font=font3).grid(row=1, rowspan=2, column=1, padx = 10, sticky=W)
 railUpButton = Button(railFrame, text="˄", command=railChangeUp).grid(row=1, rowspan=1, column=2, padx=10, sticky=W)
 railDownButton = Button(railFrame, text="˅", command=railChangeDown).grid(row=2, rowspan=1, column=2, padx=10, sticky=W)
-railSpaceLabel = Label(railFrame, text="Rail Space : " + str(railSpaceList[railNum.get()])).grid(row=3, column=1, padx=10, sticky=W)
+railSpaceLabel = Label(railFrame, text="Rail Space : " + str(railSpaceSidesList[railNum.get()])).grid(row=3, column=1, padx=10, sticky=W)
 
 #For Material
 
@@ -960,21 +1136,21 @@ switchQLabel.grid(row=0, column=0, columnspan=3, pady=10, sticky=E)
 defaultLabel = Label(switchFrame, text = "---------", fg='#fff', font=font3).grid(row=2, rowspan=2, column=0, padx=10, sticky=E)
 defaultLabel = Label(switchFrame, text="Standard", font=font3).grid(row=2, rowspan=2, column=0, padx=10, sticky=E)
 customLabel = Label(switchFrame, text = "---------", fg='#fff', font=font3).grid(row=2, rowspan=2, column=2, padx=10, sticky=W)
-customLabel = Label(switchFrame, text="Custom", font=font1).grid(row=2, rowspan=2, column=2, padx=10, sticky=W)
+customLabel = Label(switchFrame, text="Custom", font=font2).grid(row=2, rowspan=2, column=2, padx=10, sticky=W)
 def switchIt():
     if switch.get() == 0:
         switch.set(1)
         dLabel = Label(switchFrame, text = "--------------", fg='#fff', font=font3).grid(row=2, rowspan=2, column=0, padx=10, sticky=E)
         dLabel = Label(switchFrame, text="Standard", font=font3).grid(row=2, rowspan=2, column=0, padx=10, sticky=E)
         cLabel = Label(switchFrame, text = "-----------", fg='#fff', font=font3).grid(row=2, rowspan=2, column=2, padx=10, sticky=W)
-        cLabel = Label(switchFrame, text="Custom", font=font1).grid(row=2, rowspan=2, column=2, padx=10, sticky=W)
+        cLabel = Label(switchFrame, text="Custom", font=font2).grid(row=2, rowspan=2, column=2, padx=10, sticky=W)
         switchButton = Button(switchFrame, text="⚫☷☷", command=switchIt).grid(row=2, rowspan=2, column=1, padx=5, sticky=W+E)
     elif switch.get() == 1:
         switch.set(0)
         cLabel = Label(switchFrame, text = "-----------", fg='#fff', font=font3).grid(row=2, rowspan=2, column=2, padx=10, sticky=W)
         cLabel = Label(switchFrame, text="Custom", font=font3).grid(row=2, rowspan=2, column=2, padx=10, sticky=W)
         dLabel = Label(switchFrame, text = "--------------", fg='#fff', font=font3).grid(row=2, rowspan=2, column=0, padx=10, sticky=E)
-        dLabel = Label(switchFrame, text="Standard", font=font1).grid(row=2, rowspan=2, column=0, padx=10, sticky=E)
+        dLabel = Label(switchFrame, text="Standard", font=font2).grid(row=2, rowspan=2, column=0, padx=10, sticky=E)
         switchButton = Button(switchFrame, text="☷☷⚫", command=switchIt).grid(row=2, rowspan=2, column=1, padx=5, sticky=W+E)
 
 if switch.get() == 1:
